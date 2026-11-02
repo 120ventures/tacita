@@ -4,6 +4,26 @@ Overview of user-facing changes.
 
 ---
 
+## 2026-11-02
+
+### Neuer Preis
+- 899 € pro Übergabe, Interviews und Übergabe-Dossier inklusive, statt „ab 2.490 €“
+- Das Firmengedächtnis für die Nachfolge ist jetzt ein Abo um 69 € im Monat; steht in der Ergebnis-Sektion, bei „Enthalten“ und in der FAQ
+
+### Branchenseiten und persönliche Links für den Outreach
+- Eigene Seiten pro Branche: `tacita.at/gastro`, `/kfz`, `/installateur`, `/tischler`, `/handel`. Der Hero-Pill sagt z. B. „Für Gasthäuser und Hotels“ und die Interview-Karten zeigen ein Beispiel aus der Branche
+- Optional pro Kontakt: `tacita.at/gastro?name=Familie%20Huber&von=Andrea` zeigt „Für Familie Huber“ im Hero und im Buchungsbereich, wer den Link geschickt hat
+
+### Erstgespräch direkt auf der Seite buchen
+- Neuer Abschnitt „20 Minuten mit Andrea“ mit eingebettetem Calendly-Kalender; alle „Erstgespräch buchen“-Buttons springen dorthin statt auf eine externe Seite
+- Name und E-Mail aus dem Hero-Formular werden im Kalender vorausgefüllt
+- Ohne Zahlungslink führt „Platz sichern“ ebenfalls zur Buchung
+
+### E-Mail-Adressen werden gespeichert
+- Eine im Hero eingegebene E-Mail wird zusammen mit Name, Branche und Absender des Links in Supabase gespeichert (Tabelle `leads`, nur Schreibzugriff für Besucher), bevor es zum Kalender geht
+
+---
+
 ## 2026-10-30
 
 ### One offer, one price

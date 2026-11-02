@@ -39,6 +39,10 @@ pnpm dev        # http://localhost:8080
 
 Design source: Figma file `GzbHAa9hXQu7Vci5mI4t2i` (Variante A, mobile mockups). The hero orb from Figma is replaced by an animated voice waveform.
 
-CTA links come from `.env.local` (see `.env.example`): `VITE_CALENDLY_URL` for the Erstgespräch booking (the hero email is passed on as `?email=`), `VITE_DEPOSIT_URL` for the Stripe payment link (490 € Gründungskunden-Anzahlung), `VITE_SAMPLE_DOSSIER_URL` for the sample dossier. Without them the buttons jump to sections on the page.
+The Erstgespräch calendar (Calendly) is embedded in the section `#erstgespraech`; the link defaults to Andrea's calendar in `src/content/landing.ts` and can be overridden with `VITE_CALENDLY_URL` in `.env.local`. `VITE_DEPOSIT_URL` is the Stripe payment link for the 490 € deposit (without it the deposit buttons lead to the booking), `VITE_SAMPLE_DOSSIER_URL` the sample dossier.
+
+**Personal links for the private outreach** (see `docs/research/2026-11-02-zielgruppe-erster-outreach.md`): industry pages `/gastro`, `/kfz`, `/installateur`, `/tischler`, `/handel` swap the hero pill and example cards. Optional query parameters: `name` greets the visitor in the hero pill and prefills Calendly, `von` shows who sent the link, e.g. `/gastro?name=Familie%20Huber&von=Andrea`. Unknown paths show the 404 page.
+
+**Leads in Supabase:** the hero email is stored in `public.leads` (migration in `supabase/migrations/`) before the visitor is scrolled to the calendar. Setup: `supabase login`, `supabase link --project-ref <ref>`, `supabase db push`, then set `VITE_SUPABASE_URL` and `VITE_SUPABASE_PUBLISHABLE_KEY` in `.env.local` and in the Netlify site settings. Without them the page works and simply skips the insert.
 
 Before going live: Impressum and Datenschutz pages, self-hosted fonts instead of Google Fonts, cookie consent + ad tracking (`docs/COOKIE_CONSENT_SETUP.md`).

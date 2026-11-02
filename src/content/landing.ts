@@ -40,13 +40,73 @@ export interface LandingContent {
     deposit: string;
   };
   faq: { q: string; a: string }[];
+  booking: { pill: string; title: string; subtitle: string; personal: string; note: string };
   closing: { title: string; subtitle: string };
 }
 
-// Placeholders until the real links exist. Set them in .env.local.
-export const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL || "";
-export const DEPOSIT_URL = import.meta.env.VITE_DEPOSIT_URL || "#preise";
+// Andrea's Erstgespräch calendar. Override with VITE_CALENDLY_URL in .env.local.
+export const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL || "https://calendly.com/andrea-buttinger-120/new-meeting-2";
+// Stripe payment link for the deposit. Without it the deposit buttons lead to the booking section.
+export const DEPOSIT_URL = import.meta.env.VITE_DEPOSIT_URL || "";
 export const SAMPLE_DOSSIER_URL = import.meta.env.VITE_SAMPLE_DOSSIER_URL || "#ergebnis";
+
+// Industry presets for personal links (?branche=kfz). They swap the hero cards so the example
+// sounds like the visitor's own business. Keys must match BRANCHEN in src/lib/personalize.ts.
+export const branchen: Record<
+  string,
+  { label: string; pill: string; question: string; mobileQuestion: string; quoteLabel: string; quote: string; mobileQuote: string; tags: string[] }
+> = {
+  kfz: {
+    pill: "Für Kfz-Werkstätten",
+    label: "Kfz-Werkstatt",
+    question: "Erzählen Sie mir vom letzten Mal, als Großkunde Huber unzufrieden war. Was haben Sie gemacht?",
+    mobileQuestion: "Wann war Großkunde Huber zuletzt unzufrieden?",
+    quoteLabel: "Inhaber, 63 · Kfz-Werkstatt",
+    quote: "Da ruf ich nie im Büro an, sondern direkt beim Polier am Handy. Und vor Ostern nie liefern.",
+    mobileQuote: "Nie im Büro anrufen, direkt beim Polier am Handy.",
+    tags: ["Kunde Huber", "Ansprechpartner", "Lieferfenster"],
+  },
+  installateur: {
+    pill: "Für Installationsbetriebe",
+    label: "Installationsbetrieb",
+    question: "Welche Anlage im Bestand macht am meisten Ärger, und was wissen nur Sie darüber?",
+    mobileQuestion: "Welche Anlage macht am meisten Ärger?",
+    quoteLabel: "Inhaber, 61 · Installateur",
+    quote: "Die Heizung im Gemeindeamt: Den Mischer nie auf Automatik, sonst steht sie im Winter. Steht nirgends.",
+    mobileQuote: "Den Mischer im Gemeindeamt nie auf Automatik.",
+    tags: ["Anlage Gemeindeamt", "Wartungsfalle", "Ersatzteile"],
+  },
+  tischler: {
+    pill: "Für Tischlereien",
+    label: "Tischlerei",
+    question: "Wie kalkulieren Sie eine Einbauküche, bei der der Kunde noch nicht weiß, was er will?",
+    mobileQuestion: "Wie kalkulieren Sie eine unklare Küche?",
+    quoteLabel: "Inhaber, 64 · Tischlerei",
+    quote: "Beim Furnier nur vom Lieferanten in Linz, der Rest wirft. Und beim Architekten Mayer immer 15 % drauf.",
+    mobileQuote: "Furnier nur aus Linz, beim Architekten 15 % drauf.",
+    tags: ["Lieferant Furnier", "Kalkulation", "Architekt Mayer"],
+  },
+  gastro: {
+    pill: "Für Gasthäuser und Hotels",
+    label: "Gasthaus",
+    question: "Was passiert in der Küche, wenn Sie eine Woche nicht da sind? Wo hakt es zuerst?",
+    mobileQuestion: "Was hakt zuerst, wenn Sie nicht da sind?",
+    quoteLabel: "Wirtin, 62 · Gasthaus",
+    quote: "Das Fleisch kommt vom Bauern in Gaming, nicht vom Großhandel. Und die Stammtischrunde am Donnerstag kriegt den Tisch beim Fenster.",
+    mobileQuote: "Fleisch vom Bauern in Gaming, Stammtisch am Fenster.",
+    tags: ["Lieferant Fleisch", "Stammgäste", "Saisonplanung"],
+  },
+  handel: {
+    pill: "Für den Fachhandel",
+    label: "Fachhandel",
+    question: "Welche Konditionen haben Sie mit Ihren drei wichtigsten Lieferanten ausgehandelt, und warum?",
+    mobileQuestion: "Welche Konditionen haben Ihre Top-3-Lieferanten?",
+    quoteLabel: "Inhaber, 60 · Fachhandel",
+    quote: "Beim Hauptlieferanten gilt noch der Rabatt von 2009, aber nur, solange ich bestelle. Das weiß dort auch keiner mehr.",
+    mobileQuote: "Der Rabatt von 2009 gilt nur, solange ich bestelle.",
+    tags: ["Lieferantenkonditionen", "Sortiment", "Schlüsselkunden"],
+  },
+};
 
 export const navLinks = [
   { label: "So funktioniert’s", href: "#ablauf" },
@@ -120,7 +180,8 @@ export const foundingIncludes = [
   "Jedes Gespräch auf Ihren Betrieb vorbereitet",
   "Persönliche Begleitung durch das Team",
   "Start der Interviews innerhalb von 2 Wochen",
-  "Übergabe-Dossier und Archiv",
+  "Übergabe-Dossier inklusive",
+  "Firmengedächtnis für die Nachfolge als Abo, 69 € im Monat",
   "Hilfe bei der Förderung",
 ];
 
@@ -191,6 +252,7 @@ export const content: LandingContent = {
       "Durchsuchbar: Frage stellen, Antwort in Ihren Worten",
       "QR-Codes an Maschinen und Fahrzeugen",
       "Wissens-Hotline für die ersten Monate",
+      "Als Abo um 69 € im Monat, jederzeit kündbar",
     ],
   },
   founding: {
@@ -198,9 +260,9 @@ export const content: LandingContent = {
     title: "Sichern Sie Ihren Platz für die Übergabe",
     subtitle: "Persönliche Begleitung vom Erstgespräch bis zum fertigen Dossier. Die Interviews starten innerhalb von 2 Wochen.",
     badge: "Begrenzte Plätze pro Monat",
-    pricePrefix: "ab",
-    price: "2.490 €",
-    priceUnit: "pro Übergabe, fester Preis nach dem Erstgespräch",
+    pricePrefix: "",
+    price: "899 €",
+    priceUnit: "pro Übergabe, Interviews und Übergabe-Dossier inklusive",
     deposit: "490 € Anzahlung sichern Ihren Platz. Voll angerechnet, rückerstattbar, solange die Interviews nicht begonnen haben.",
   },
   faq: [
@@ -215,13 +277,21 @@ export const content: LandingContent = {
     },
     {
       q: "Was kostet es?",
-      a: "Ab 2.490 € pro Übergabe, je nach Größe des Betriebs und Zahl der Gespräche. Nach dem Erstgespräch bekommen Sie einen festen Preis. Die Anzahlung von 490 € wird voll angerechnet.",
+      a: "899 € pro Übergabe, Interviews und Übergabe-Dossier inklusive, unabhängig von der Branche. Das Firmengedächtnis, das Ihre Nachfolge später befragt, gibt es als Abo um 69 € im Monat. Die Anzahlung von 490 € wird voll angerechnet.",
     },
     {
       q: "Gibt es Förderungen?",
       a: "Für Betriebsübergaben gibt es in mehreren Bundesländern Beratungsförderungen. Wir prüfen im Erstgespräch, ob Ihr Fall infrage kommt, und helfen beim Antrag.",
     },
   ],
+  booking: {
+    pill: "Erstgespräch",
+    title: "20 Minuten mit Andrea",
+    subtitle:
+      "Kostenlos und unverbindlich. Wir klären, welches Wissen bei Ihnen gesichert werden muss und ob Tacita zu Ihrer Übergabe passt.",
+    personal: "{von} hat Ihnen diesen Link geschickt. Wählen Sie einfach eine Zeit, die Ihnen passt.",
+    note: "Der Termin wird über Calendly gebucht. Sie bekommen sofort eine Bestätigung per E-Mail.",
+  },
   closing: {
     title: "Ihr Wissen ist Teil des Kaufpreises.",
     subtitle: "Sichern Sie es, bevor Sie gehen. Das Erstgespräch dauert 20 Minuten und ist kostenlos.",

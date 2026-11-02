@@ -1,5 +1,5 @@
-import { useEffect, useId, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useId, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
+import { Link, useParams } from "react-router-dom";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { FileText, Menu, Phone, Search } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import siteCallPoster from "@/assets/site-call-poster.jpg";
 import {
   CALENDLY_URL,
   DEPOSIT_URL,
+  branchen,
   handoverCases,
   foundingIncludes,
   navLinks,
@@ -18,9 +19,32 @@ import {
   content,
   type LandingContent,
 } from "@/content/landing";
+import { isBranche, readPersonalization, type Personalization } from "@/lib/personalize";
+import NotFound from "./NotFound";
+import { saveLead } from "@/integrations/supabase/leads";
 
-// Without a Calendly link, booking buttons jump to the closing call-to-action.
-const BOOK_HREF = CALENDLY_URL || "#kontakt";
+// The calendar is embedded on the page, so every booking button jumps to it.
+const BOOK_HREF = "#erstgespraech";
+// Without a payment link the deposit buttons lead to the booking as well.
+const DEPOSIT_HREF = DEPOSIT_URL || BOOK_HREF;
+
+// Calendly prefills name and email from the query string; the rest is styling and tracking.
+const calendlyEmbedUrl = (p: Personalization, email: string) => {
+  const url = new URL(CALENDLY_URL);
+  url.searchParams.set("hide_gdpr_banner", "1");
+  url.searchParams.set("hide_landing_page_details", "1");
+  url.searchParams.set("primary_color", "0b9a72");
+  url.searchParams.set("text_color", "0c1a17");
+  url.searchParams.set("background_color", "ffffff");
+  url.searchParams.set("utm_source", "tacita.at");
+  url.searchParams.set("utm_medium", p.von ? "personal-link" : "website");
+  if (p.name) {
+    url.searchParams.set("name", p.name);
+    url.searchParams.set("utm_content", p.name);
+  }
+  if (email) url.searchParams.set("email", email);
+  return url.toString();
+};
 
 // Logo mark: five voice bars, same idea as the hero waveform. Kept in sync with public/favicon.svg.
 const LogoMark = ({ className }: { className?: string }) => {
@@ -163,19 +187,14 @@ const Header = ({ v }: { v: LandingContent }) => (
   </header>
 );
 
-const EmailBooking = ({ placeholder }: { placeholder: string }) => {
+const EmailBooking = ({ placeholder, onBooked }: { placeholder: string; onBooked: (email: string) => void }) => {
   const [email, setEmail] = useState("");
 
   const submit = (e: FormEvent) => {
     e.preventDefault();
-    if (CALENDLY_URL) {
-      // Calendly prefills the booking form from the email query parameter.
-      const url = new URL(CALENDLY_URL);
-      if (email) url.searchParams.set("email", email);
-      window.location.href = url.toString();
-    } else {
-      document.getElementById("kontakt")?.scrollIntoView({ behavior: "smooth" });
-    }
+    // The lead is stored in the background; the visitor goes straight to the calendar.
+    onBooked(email);
+    document.getElementById("erstgespraech")?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -231,7 +250,7 @@ const VoiceWave = () => (
   </div>
 );
 
-const Hero = ({ v }: { v: LandingContent }) => {
+const Hero = ({ v, onBooked }: { v: LandingContent; onBooked: (email: string) => void }) => {
   const c = v.heroCards;
   return (
     <section id="hero" className="relative overflow-hidden px-5 pb-8 pt-6 sm:px-10 sm:pb-14 sm:pt-[72px]">
@@ -312,7 +331,7 @@ const Hero = ({ v }: { v: LandingContent }) => {
         </div>
 
         <div className="mt-1.5 flex w-full justify-center sm:mt-8">
-          <EmailBooking placeholder={v.emailPlaceholder} />
+          <EmailBooking placeholder={v.emailPlaceholder} onBooked={onBooked} />
         </div>
 
         <ul className="mt-5 hidden flex-wrap justify-center gap-x-7 gap-y-2 text-sm text-muted-foreground md:flex">
@@ -485,9 +504,87 @@ const Faq = ({ items }: { items: LandingContent["faq"] }) => (
   </AccordionPrimitive.Root>
 );
 
+// Embedded Calendly calendar. Loads lazily so the page stays fast for visitors who only read.
+const Booking = ({ v, p, email }: { v: LandingContent; p: Personalization; email: string }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setVisible(true);
+      },
+      { rootMargin: "600px" },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <Section id="erstgespraech">
+      <SectionHeader pill={v.booking.pill} title={v.booking.title} subtitle={v.booking.subtitle} />
+      {p.von && (
+        <p className="mx-auto mt-4 max-w-[560px] rounded-2xl bg-accent px-5 py-3 text-center text-[15px] text-primary">
+          {v.booking.personal.replace("{von}", p.von)}
+        </p>
+      )}
+      <div
+        ref={ref}
+        className="mx-auto mt-6 w-full max-w-[1000px] overflow-hidden rounded-[20px] border bg-card sm:mt-10 sm:rounded-3xl"
+      >
+        {visible ? (
+          <iframe
+            key={email}
+            title="Erstgespräch buchen"
+            src={calendlyEmbedUrl(p, email)}
+            className="h-[760px] w-full sm:h-[720px]"
+          />
+        ) : (
+          <div className="flex h-[760px] items-center justify-center text-sm text-muted-foreground sm:h-[720px]">
+            Kalender wird geladen …
+          </div>
+        )}
+      </div>
+      <p className="mt-4 text-center text-[13px] text-subtle">
+        {v.booking.note}{" "}
+        <a href={calendlyEmbedUrl(p, email)} target="_blank" rel="noreferrer" className="underline hover:text-foreground">
+          Kalender in neuem Fenster öffnen
+        </a>
+      </p>
+    </Section>
+  );
+};
+
 const Landing = () => {
-  const v = content;
+  // Personal links (?name=Huber&branche=kfz&von=Andrea) swap the hero example and greet the visitor.
+  const { branche: pathBranche } = useParams();
+  const p = useMemo(() => readPersonalization(window.location.search, pathBranche), [pathBranche]);
+  const v = useMemo<LandingContent>(() => {
+    const b = p.branche ? branchen[p.branche] : undefined;
+    return {
+      ...content,
+      pillTag: p.name ? "Persönlich" : b ? b.label : content.pillTag,
+      pill: p.name ? `Für ${p.name} · Übergabe-Interviews per Telefon` : b ? `${b.pill} · Übergabe-Interviews per Telefon` : content.pill,
+      pillShort: p.name ? `Für ${p.name}` : b ? b.pill : content.pillShort,
+      heroCards: b
+        ? {
+            ...content.heroCards,
+            question: { ...content.heroCards.question, text: b.question, mobileText: b.mobileQuestion },
+            quote: { label: b.quoteLabel, text: b.quote, mobileText: b.mobileQuote },
+            tags: { ...content.heroCards.tags, tags: b.tags },
+          }
+        : content.heroCards,
+    };
+  }, [p]);
   const [pastHero, setPastHero] = useState(false);
+  const [email, setEmail] = useState("");
+
+  const onBooked = (value: string) => {
+    setEmail(value);
+    if (value) void saveLead({ email: value, name: p.name, branche: p.branche, ref: p.von });
+  };
 
   useEffect(() => {
     document.title = v.title;
@@ -502,12 +599,15 @@ const Landing = () => {
     return () => io.disconnect();
   }, []);
 
+  // /irgendwas is not an industry page.
+  if (pathBranche && !isBranche(pathBranche)) return <NotFound />;
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header v={v} />
 
       <main>
-        <Hero v={v} />
+        <Hero v={v} onBooked={onBooked} />
 
         <Section muted>
           <SectionHeader pill="Das Problem" title={v.problem.title} subtitle={v.problem.subtitle} />
@@ -645,9 +745,11 @@ const Landing = () => {
                     {v.founding.badge}
                   </span>
                   <p className="mt-3 flex items-baseline gap-2 font-bold tracking-[-1.8px] sm:mt-[18px] sm:tracking-[-2.5px]">
-                    <span className="text-sm font-medium tracking-normal text-muted-foreground sm:text-[17px]">
-                      {v.founding.pricePrefix}
-                    </span>
+                    {v.founding.pricePrefix && (
+                      <span className="text-sm font-medium tracking-normal text-muted-foreground sm:text-[17px]">
+                        {v.founding.pricePrefix}
+                      </span>
+                    )}
                     <span className="text-[46px] leading-none sm:text-[64px]">{v.founding.price}</span>
                   </p>
                   <p className="pt-2 text-sm text-muted-foreground sm:text-[15px]">{v.founding.priceUnit}</p>
@@ -656,7 +758,7 @@ const Landing = () => {
                   </p>
                   <div className="hidden flex-col gap-2.5 pt-7 md:flex">
                     <Button asChild size="xl" className="w-full">
-                      <a href={DEPOSIT_URL}>Platz sichern</a>
+                      <a href={DEPOSIT_HREF}>Platz sichern</a>
                     </Button>
                     <Button asChild size="xl" variant="outline" className="w-full">
                       <a href={BOOK_HREF}>Erst Erstgespräch buchen</a>
@@ -676,7 +778,7 @@ const Landing = () => {
                 </div>
                 <div className="flex flex-col gap-2.5 md:hidden">
                   <Button asChild size="xl" className="w-full">
-                    <a href={DEPOSIT_URL}>Platz sichern</a>
+                    <a href={DEPOSIT_HREF}>Platz sichern</a>
                   </Button>
                   <Button asChild size="xl" variant="outline" className="w-full">
                     <a href={BOOK_HREF}>Erst Erstgespräch buchen</a>
@@ -693,6 +795,8 @@ const Landing = () => {
             <Faq items={v.faq} />
           </div>
         </Section>
+
+        <Booking v={v} p={p} email={email} />
 
         <section id="kontakt" className="scroll-mt-20 px-5 pt-10 sm:px-10 sm:pt-16 lg:px-16">
           <div className="relative mx-auto max-w-[1312px] overflow-hidden rounded-3xl bg-foreground px-6 py-14 text-center sm:rounded-[32px] sm:py-[88px]">
