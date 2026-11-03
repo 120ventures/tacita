@@ -4,6 +4,16 @@ Overview of user-facing changes.
 
 ---
 
+## 2026-11-03
+
+### Kein Preis auf der Seite
+- Die Preis-Sektion heißt jetzt „Jetzt starten“ und zeigt das kostenlose Erstgespräch statt eines Preises; die Anzahlung ist verschwunden, es gibt nur noch den Button „Erstgespräch buchen“
+- FAQ „Was kostet es?“ verweist aufs Erstgespräch
+- Abo-Preis aus Ergebnis-Sektion und „Enthalten“ entfernt
+- Grund: Im ersten Test sollen die Gespräche zeigen, was die Übergabe den Inhaber:innen wert ist, ohne dass sie vorher einen Preis gesehen haben
+
+---
+
 ## 2026-11-02
 
 ### Neuer Preis

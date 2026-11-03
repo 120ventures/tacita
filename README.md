@@ -23,10 +23,7 @@
 | Austrian takeovers per year | ~8,200 |
 | Owner-discount in valuation for owner-dependent businesses | 20–40% |
 | Bottom-up Austria market | ~EUR 160M / year |
-| Price: succession case | EUR 2,490 (or 490 + 1% of sale price) |
-| Price: retirement case | EUR 3,900 |
-| Price: parental leave case | EUR 1,490 |
-| Subscription "Wissens-Schutzbrief" | EUR 99–299 / month / company |
+| Price (working assumption, not shown on the site) | EUR 899 per hand-over incl. dossier; company memory EUR 69 / month |
 
 ## Development
 
@@ -39,7 +36,7 @@ pnpm dev        # http://localhost:8080
 
 Design source: Figma file `GzbHAa9hXQu7Vci5mI4t2i` (Variante A, mobile mockups). The hero orb from Figma is replaced by an animated voice waveform.
 
-The Erstgespräch calendar (Calendly) is embedded in the section `#erstgespraech`; the link defaults to Andrea's calendar in `src/content/landing.ts` and can be overridden with `VITE_CALENDLY_URL` in `.env.local`. `VITE_DEPOSIT_URL` is the Stripe payment link for the 490 € deposit (without it the deposit buttons lead to the booking), `VITE_SAMPLE_DOSSIER_URL` the sample dossier.
+The Erstgespräch calendar (Calendly) is embedded in the section `#erstgespraech`; the link defaults to Andrea's calendar in `src/content/landing.ts` and can be overridden with `VITE_CALENDLY_URL` in `.env.local`. `VITE_DEPOSIT_URL` is an optional payment link for a deposit (without it the start section shows only the booking button and no price; the first test deliberately shows no price), `VITE_SAMPLE_DOSSIER_URL` the sample dossier.
 
 **Personal links for the private outreach** (see `docs/research/2026-11-02-zielgruppe-erster-outreach.md`): industry pages `/gastro`, `/kfz`, `/installateur`, `/tischler`, `/handel` swap the hero pill and example cards. Optional query parameters: `name` greets the visitor in the hero pill and prefills Calendly, `von` shows who sent the link, e.g. `/gastro?name=Familie%20Huber&von=Andrea`. Unknown paths show the 404 page.
 

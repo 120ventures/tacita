@@ -25,8 +25,22 @@ import { saveLead } from "@/integrations/supabase/leads";
 
 // The calendar is embedded on the page, so every booking button jumps to it.
 const BOOK_HREF = "#erstgespraech";
-// Without a payment link the deposit buttons lead to the booking as well.
-const DEPOSIT_HREF = DEPOSIT_URL || BOOK_HREF;
+// With a payment link the start section offers the deposit; without it only the booking.
+const FoundingButtons = () =>
+  DEPOSIT_URL ? (
+    <>
+      <Button asChild size="xl" className="w-full">
+        <a href={DEPOSIT_URL}>Platz sichern</a>
+      </Button>
+      <Button asChild size="xl" variant="outline" className="w-full">
+        <a href={BOOK_HREF}>Erst Erstgespräch buchen</a>
+      </Button>
+    </>
+  ) : (
+    <Button asChild size="xl" className="w-full">
+      <a href={BOOK_HREF}>Erstgespräch buchen</a>
+    </Button>
+  );
 
 // Calendly prefills name and email from the query string; the rest is styling and tracking.
 const calendlyEmbedUrl = (p: Personalization, email: string) => {
@@ -735,7 +749,7 @@ const Landing = () => {
           </div>
         </Section>
 
-        <Section id="preise">
+        <Section id="start">
           <SectionHeader pill={v.founding.pill} title={v.founding.title} subtitle={v.founding.subtitle} />
           <div className="mt-[18px] flex justify-center sm:mt-14">
             <div className="tacita-ring w-full max-w-[760px] rounded-[22px] p-0.5 shadow-[0_30px_40px_rgba(11,154,114,0.18)] sm:rounded-[28px] sm:p-[3px]">
@@ -753,16 +767,13 @@ const Landing = () => {
                     <span className="text-[46px] leading-none sm:text-[64px]">{v.founding.price}</span>
                   </p>
                   <p className="pt-2 text-sm text-muted-foreground sm:text-[15px]">{v.founding.priceUnit}</p>
-                  <p className="pt-2.5 text-[13px] leading-[1.45] text-muted-foreground sm:pt-3.5 sm:text-[15px] sm:leading-[1.5]">
-                    {v.founding.deposit}
-                  </p>
+                  {v.founding.deposit && (
+                    <p className="pt-2.5 text-[13px] leading-[1.45] text-muted-foreground sm:pt-3.5 sm:text-[15px] sm:leading-[1.5]">
+                      {v.founding.deposit}
+                    </p>
+                  )}
                   <div className="hidden flex-col gap-2.5 pt-7 md:flex">
-                    <Button asChild size="xl" className="w-full">
-                      <a href={DEPOSIT_HREF}>Platz sichern</a>
-                    </Button>
-                    <Button asChild size="xl" variant="outline" className="w-full">
-                      <a href={BOOK_HREF}>Erst Erstgespräch buchen</a>
-                    </Button>
+                    <FoundingButtons />
                   </div>
                 </div>
                 <div className="flex-1 border-t pt-3.5 md:border-l md:border-t-0 md:pl-12 md:pt-0">
@@ -777,12 +788,7 @@ const Landing = () => {
                   </ul>
                 </div>
                 <div className="flex flex-col gap-2.5 md:hidden">
-                  <Button asChild size="xl" className="w-full">
-                    <a href={DEPOSIT_HREF}>Platz sichern</a>
-                  </Button>
-                  <Button asChild size="xl" variant="outline" className="w-full">
-                    <a href={BOOK_HREF}>Erst Erstgespräch buchen</a>
-                  </Button>
+                  <FoundingButtons />
                 </div>
               </div>
             </div>
@@ -847,7 +853,7 @@ const Landing = () => {
         )}
       >
         <Button asChild size="xl" className="w-full">
-          <a href="#preise">Platz sichern</a>
+          <a href={BOOK_HREF}>Erstgespräch buchen</a>
         </Button>
       </div>
     </div>

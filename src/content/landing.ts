@@ -112,7 +112,7 @@ export const navLinks = [
   { label: "So funktioniert’s", href: "#ablauf" },
   { label: "Ergebnis", href: "#ergebnis" },
   { label: "Für wen", href: "#fuer-wen" },
-  { label: "Preise", href: "#preise" },
+  { label: "Jetzt starten", href: "#start" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -180,8 +180,8 @@ export const foundingIncludes = [
   "Jedes Gespräch auf Ihren Betrieb vorbereitet",
   "Persönliche Begleitung durch das Team",
   "Start der Interviews innerhalb von 2 Wochen",
-  "Übergabe-Dossier inklusive",
-  "Firmengedächtnis für die Nachfolge als Abo, 69 € im Monat",
+  "Übergabe-Dossier für Käufer, Bank und Nachfolge",
+  "Firmengedächtnis für Ihre Nachfolge",
   "Hilfe bei der Förderung",
 ];
 
@@ -252,7 +252,6 @@ export const content: LandingContent = {
       "Durchsuchbar: Frage stellen, Antwort in Ihren Worten",
       "QR-Codes an Maschinen und Fahrzeugen",
       "Wissens-Hotline für die ersten Monate",
-      "Als Abo um 69 € im Monat, jederzeit kündbar",
     ],
   },
   founding: {
@@ -261,9 +260,9 @@ export const content: LandingContent = {
     subtitle: "Persönliche Begleitung vom Erstgespräch bis zum fertigen Dossier. Die Interviews starten innerhalb von 2 Wochen.",
     badge: "Begrenzte Plätze pro Monat",
     pricePrefix: "",
-    price: "899 €",
-    priceUnit: "pro Übergabe, Interviews und Übergabe-Dossier inklusive",
-    deposit: "490 € Anzahlung sichern Ihren Platz. Voll angerechnet, rückerstattbar, solange die Interviews nicht begonnen haben.",
+    price: "Erstgespräch",
+    priceUnit: "20 Minuten, kostenlos. Danach bekommen Sie ein Angebot für Ihre Übergabe.",
+    deposit: "",
   },
   faq: [
     whoInterviews,
@@ -277,7 +276,7 @@ export const content: LandingContent = {
     },
     {
       q: "Was kostet es?",
-      a: "899 € pro Übergabe, Interviews und Übergabe-Dossier inklusive, unabhängig von der Branche. Das Firmengedächtnis, das Ihre Nachfolge später befragt, gibt es als Abo um 69 € im Monat. Die Anzahlung von 490 € wird voll angerechnet.",
+      a: "Das besprechen wir im Erstgespräch, abhängig von der Größe Ihres Betriebs und der Zahl der Gespräche. Das Erstgespräch selbst ist kostenlos.",
     },
     {
       q: "Gibt es Förderungen?",
