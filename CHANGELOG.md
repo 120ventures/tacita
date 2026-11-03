@@ -6,6 +6,9 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Neue Branchenseite /friseur
+- „Salon übergeben. Wissen behalten.“ mit eigenem Foto, Interview-Beispiel (Farbrezeptur der Stammkundin), Dossier- und Firmengedächtnis-Punkten und Chat-Beispiel; Bildnachweis im Impressum
+
 ### Förderung und Wissbert
 - FAQ „Gibt es Förderungen?“ und der Punkt „Hilfe bei der Förderung“ sind raus, weil Tacita noch in keinem Förderprogramm gelistet ist
 - Wissbert in der Karte „Fragen statt anrufen“ ist deutlich größer

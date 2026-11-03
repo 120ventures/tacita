@@ -1,7 +1,7 @@
 // Industry pages and personal links for the private outreach: tacita.at/gastro?name=Huber&von=Andrea
 // Everything is optional. Without parameters the page is the public version.
 
-export const BRANCHEN = ["kfz", "installateur", "tischler", "gastro", "handel"] as const;
+export const BRANCHEN = ["kfz", "installateur", "tischler", "gastro", "handel", "friseur"] as const;
 export type Branche = (typeof BRANCHEN)[number];
 
 export interface Personalization {

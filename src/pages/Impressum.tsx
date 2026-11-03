@@ -9,6 +9,7 @@ const credits = [
   { what: "Foto Installationsbetrieb", who: "Mariia Vitkovska", id: "2170643841" },
   { what: "Foto Tischlerei", who: "LSOphoto", id: "2247479509" },
   { what: "Foto Fachhandel", who: "andresr", id: "1586522918" },
+  { what: "Foto Friseursalon", who: "koldo studio", id: "2239632171" },
 ];
 
 const Impressum = () => {

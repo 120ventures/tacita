@@ -13,6 +13,7 @@ Kontakte stehen in der Notion-Datenbank „Outreach-Liste Österreich“ (Segmen
 | Installateure | https://tacita.at/installateur | |
 | Tischlereien | https://tacita.at/tischler | |
 | Fachhandel | https://tacita.at/handel | |
+| Friseursalons | https://tacita.at/friseur | |
 
 Calendly (20 Minuten): https://calendly.com/andrea-buttinger-120/new-meeting-3
 Für Tracking den Link mit `?utm_source=nachfolgeboerse&utm_medium=email&utm_content=<name>` anhängen; die Landingpage gibt Name und UTM an Calendly weiter.
