@@ -6,6 +6,11 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Förderung und Wissbert
+- FAQ „Gibt es Förderungen?“ und der Punkt „Hilfe bei der Förderung“ sind raus, weil Tacita noch in keinem Förderprogramm gelistet ist
+- Wissbert in der Karte „Fragen statt anrufen“ ist deutlich größer
+- FAQ „Wer führt die Interviews?“ sagt jetzt klar: Wissbert, der KI-Interviewer; das Team bereitet vor und liest gegen
+
 ### Band früher, Gehirn im Problem-Abschnitt
 - Das Band mit Video bzw. Branchenfoto steht jetzt direkt unter dem Hero, vor „Das Problem“
 - Unter „Das wichtigste Wissen Ihres Betriebs steht nirgends“ pulsiert ein Gehirn, aus dem Wissens-Chips wie „Kunde Huber“ oder „Lieferant Linz“ nach rechts driften und verblassen; bei reduzierter Bewegung steht das Bild still

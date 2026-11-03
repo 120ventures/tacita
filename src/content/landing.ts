@@ -371,12 +371,11 @@ export const foundingIncludes = [
   "Start der Interviews innerhalb von 2 Wochen",
   "Übergabe-Dossier für Käufer, Bank und Nachfolge",
   "Firmengedächtnis für Ihre Nachfolge",
-  "Hilfe bei der Förderung",
 ];
 
 const whoInterviews = {
   q: "Wer führt die Interviews?",
-  a: "Erfahrene Interviewer:innen aus unserem Team. Unser Interview-System bereitet jedes Gespräch vor, wertet es aus und baut daraus Dossier und Archiv.",
+  a: "Wissbert, unser KI-Interviewer. Er ruft Sie an, stellt die Fragen und hört zu, wie ein Kollege aus dem Fach, geduldig und ohne zu bewerten. Unser Team bereitet jedes Gespräch auf Ihren Betrieb vor, liest jede Antwort gegen und baut daraus Dossier und Firmengedächtnis.",
 };
 
 export const content: LandingContent = {
@@ -470,10 +469,6 @@ export const content: LandingContent = {
     {
       q: "Woher kommt der Name Tacita?",
       a: "Von „tacit knowledge“, dem stillen Wissen: alles, was man kann und weiß, aber nie aufgeschrieben hat. Genau dieses Wissen holt Tacita aus dem Kopf in ein Dossier. Tacita war außerdem in Rom die Göttin der Stille.",
-    },
-    {
-      q: "Gibt es Förderungen?",
-      a: "Für Betriebsübergaben gibt es in mehreren Bundesländern Beratungsförderungen. Wir prüfen im Erstgespräch, ob Ihr Fall infrage kommt, und helfen beim Antrag.",
     },
   ],
   chat: {

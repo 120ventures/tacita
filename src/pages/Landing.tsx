@@ -833,8 +833,8 @@ const Landing = () => {
                   </li>
                 ))}
               </ul>
-              <figure className="mt-6 flex items-center gap-4 sm:mt-8">
-                <img src="/wissbert.jpg" alt="Wissbert, der Interviewer von Tacita" className="h-24 w-auto sm:h-28" />
+              <figure className="mt-6 flex items-center gap-5 sm:mt-8 sm:gap-6">
+                <img src="/wissbert.jpg" alt="Wissbert, der Interviewer von Tacita" className="h-44 w-auto sm:h-60" />
                 <figcaption className="text-[12px] leading-[1.45] text-subtle sm:text-[13px]">
                   Das ist <span className="font-semibold text-muted-foreground">Wissbert</span>, der Interviewer von
                   Tacita. Die Figur ist KI-generiert (Google Gemini).
