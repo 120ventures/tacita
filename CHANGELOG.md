@@ -6,6 +6,11 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Schluss-Block und Beispiel-Dossier weg
+- Der dunkle Schluss-Block mit „Erstgespräch buchen“ und „Beispiel-Dossier ansehen“ ist entfernt, die Seite endet nach dem Kalender mit dem Footer
+- Der Button „Beispiel-Dossier“ im Menü ist weg (es gibt noch kein Beispiel-Dossier)
+- Footer-Link „Kontakt“ springt zum Erstgespräch
+
 ### Datenschutz-Karten
 - „Betriebsrat-tauglich“ ist weg, es bleiben EU-Hosting, AI Act und Mehrsprachig in drei Spalten
 

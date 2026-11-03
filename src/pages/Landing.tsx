@@ -161,9 +161,6 @@ const Header = ({ v }: { v: LandingContent }) => (
         </nav>
       </div>
       <div className="flex items-center gap-2.5">
-        <Button asChild variant="outline" className="hidden h-10 rounded-[10px] px-4 font-semibold sm:inline-flex">
-          <a href={v.navSecondary.href}>{v.navSecondary.label}</a>
-        </Button>
         <Button asChild variant="ink" className="h-[34px] rounded-[9px] px-3 text-[13px] font-semibold sm:h-10 sm:rounded-[10px] sm:px-4 sm:text-sm">
           <a href={BOOK_HREF}>
             <span className="sm:hidden">Erstgespräch</span>
@@ -177,7 +174,7 @@ const Header = ({ v }: { v: LandingContent }) => (
           <SheetContent side="right" className="w-72">
             <SheetTitle className="sr-only">Menü</SheetTitle>
             <nav className="mt-10 flex flex-col gap-5">
-              {[...navLinks, v.navSecondary].map((l) => (
+              {navLinks.map((l) => (
                 <SheetClose asChild key={l.label}>
                   <a href={l.href} className="text-lg font-medium">
                     {l.label}
@@ -921,34 +918,6 @@ const Landing = () => {
 
         <Booking v={v} p={p} email="" />
 
-        <section id="kontakt" className="scroll-mt-20 px-5 pt-10 sm:px-10 sm:pt-16 lg:px-16">
-          <div className="relative mx-auto max-w-[1312px] overflow-hidden rounded-3xl bg-foreground px-6 py-14 text-center sm:rounded-[32px] sm:py-[88px]">
-            <div
-              aria-hidden
-              className="tacita-glow absolute left-1/2 top-[-260px] size-[520px] -translate-x-1/2 rounded-full"
-              style={{ "--glow": "rgba(79,209,165,0.5)" } as CSSProperties}
-            />
-            <h2 className="relative text-[28px] font-bold leading-[1.15] tracking-[-0.9px] text-white sm:text-[46px] sm:tracking-[-1.4px]">
-              {v.closing.title}
-            </h2>
-            <p className="relative mx-auto mt-4 max-w-[640px] text-base leading-[1.55] text-[#a3b6af] sm:text-lg">
-              {v.closing.subtitle}
-            </p>
-            <div className="relative mt-8 flex flex-col justify-center gap-3 sm:mt-11 sm:flex-row">
-              <Button asChild size="xl" variant="outline" className="border-white bg-white text-foreground hover:bg-white/90">
-                <a href={BOOK_HREF}>Erstgespräch buchen</a>
-              </Button>
-              <Button
-                asChild
-                size="xl"
-                variant="outline"
-                className="border-[#2e4540] bg-transparent text-white hover:bg-white/10 hover:text-white"
-              >
-                <a href={v.navSecondary.href}>Beispiel-Dossier ansehen</a>
-              </Button>
-            </div>
-          </div>
-        </section>
       </main>
 
       <footer className="mt-10 border-t px-5 py-8 pb-28 sm:mt-16 sm:px-10 sm:py-10 md:pb-10 lg:px-16">
@@ -958,7 +927,7 @@ const Landing = () => {
           <div className="flex flex-wrap justify-center gap-7">
             <Link to="/impressum" className="hover:text-foreground">Impressum</Link>
             <a href="#" className="hover:text-foreground">Datenschutz</a>
-            <a href="#kontakt" className="hover:text-foreground">Kontakt</a>
+            <a href="#erstgespraech" className="hover:text-foreground">Kontakt</a>
           </div>
         </div>
       </footer>
