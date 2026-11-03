@@ -6,6 +6,10 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Fotos auf den Branchenseiten und Impressum
+- Jede Branchenseite zeigt jetzt ein eigenes Foto im Band statt des Videos (Gastro, Kfz, Installateur, Tischlerei, Fachhandel)
+- Neue Seite /impressum mit den Firmendaten der 120 Ventures GmbH, Bildnachweis für alle Fotos und das Video sowie Hinweis zur Calendly-Buchung; der Footer-Link führt jetzt dorthin
+
 ### Branchenseiten mit eigenem Inhalt
 - /gastro, /kfz, /installateur, /tischler und /handel haben jetzt eigene Headline und Subline (z. B. „Gasthaus übergeben. Wissen behalten.“), eigene Texte im Video-Band, branchenspezifische Punkte bei Übergabe-Dossier und Firmengedächtnis und einen eigenen Schlusssatz
 - Jede Branchenseite hat einen Bildplatz im Band (`public/branchen/<branche>.jpg`); solange kein Bild da ist, läuft das Video weiter
