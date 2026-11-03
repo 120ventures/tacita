@@ -40,7 +40,14 @@ export interface LandingContent {
     deposit: string;
   };
   faq: { q: string; a: string }[];
-  booking: { pill: string; title: string; subtitle: string; personal: string; note: string };
+  booking: {
+    pill: string;
+    title: string;
+    subtitle: string;
+    personal: string;
+    note: string;
+    host: { name: string; role: string; line: string; image: string };
+  };
   closing: { title: string; subtitle: string };
 }
 
@@ -406,12 +413,18 @@ export const content: LandingContent = {
     },
   ],
   booking: {
-    pill: "Erstgespräch",
-    title: "20 Minuten mit Andrea",
+    pill: "Kostenloses Erstgespräch",
+    title: "In 20 Minuten wissen Sie, ob es passt",
     subtitle:
-      "Kostenlos und unverbindlich. Wir klären, welches Wissen bei Ihnen gesichert werden muss und ob Tacita zu Ihrer Übergabe passt.",
+      "Ein kurzes Telefonat, kostenlos und unverbindlich: Wir klären, welches Wissen bei Ihrer Übergabe gesichert werden muss, und Sie bekommen eine ehrliche Einschätzung, ob Tacita für Ihren Betrieb Sinn macht.",
     personal: "{von} hat Ihnen diesen Link geschickt. Wählen Sie einfach eine Zeit, die Ihnen passt.",
-    note: "Der Termin wird über Calendly gebucht. Sie bekommen sofort eine Bestätigung per E-Mail.",
+    note: "Termin wählen, fertig. Sie bekommen sofort eine Bestätigung per E-Mail, kein Rückruf nötig.",
+    host: {
+      name: "Andrea Buttinger",
+      role: "120 Ventures, Wien",
+      line: "Das Gespräch führen Sie mit mir. Ich höre zu, stelle Fragen und sage Ihnen ehrlich, ob Tacita für Sie passt.",
+      image: "/andrea.jpg",
+    },
   },
   closing: {
     title: "Ihr Wissen ist Teil des Kaufpreises.",

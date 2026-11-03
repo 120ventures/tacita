@@ -6,6 +6,11 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Erstgespräch-Sektion
+- Heißt jetzt „In 20 Minuten wissen Sie, ob es passt“ mit dem Hinweis „Kostenloses Erstgespräch“ statt „20 Minuten mit Andrea“
+- Über dem Kalender steht, mit wem man spricht: Foto, Name und ein Satz von Andrea
+- Am Handy ist der Kalender höher, und der klebende „Erstgespräch buchen“-Button verschwindet, solange der Kalender sichtbar ist, damit er ihn nicht verdeckt
+
 ### Fotos auf den Branchenseiten und Impressum
 - Jede Branchenseite zeigt jetzt ein eigenes Foto im Band statt des Videos (Gastro, Kfz, Installateur, Tischlerei, Fachhandel)
 - Neue Seite /impressum mit den Firmendaten der 120 Ventures GmbH, Bildnachweis für alle Fotos und das Video sowie Hinweis zur Calendly-Buchung; der Footer-Link führt jetzt dorthin

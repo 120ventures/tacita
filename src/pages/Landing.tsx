@@ -556,19 +556,34 @@ const Booking = ({ v, p, email }: { v: LandingContent; p: Personalization; email
           {v.booking.personal.replace("{von}", p.von)}
         </p>
       )}
+      <div className="mx-auto mt-6 flex max-w-[640px] items-center gap-4 rounded-2xl border bg-card p-4 sm:mt-10 sm:gap-5 sm:p-5">
+        <img
+          src={v.booking.host.image}
+          alt={v.booking.host.name}
+          width={64}
+          height={64}
+          className="size-14 shrink-0 rounded-full object-cover sm:size-16"
+        />
+        <div className="text-left">
+          <p className="text-[15px] font-semibold">
+            {v.booking.host.name} <span className="font-normal text-muted-foreground">· {v.booking.host.role}</span>
+          </p>
+          <p className="pt-0.5 text-sm leading-[1.5] text-muted-foreground">{v.booking.host.line}</p>
+        </div>
+      </div>
       <div
         ref={ref}
-        className="mx-auto mt-6 w-full max-w-[1000px] overflow-hidden rounded-[20px] border bg-card sm:mt-10 sm:rounded-3xl"
+        className="mx-auto mt-4 w-full max-w-[1000px] overflow-hidden rounded-[20px] border bg-card sm:mt-6 sm:rounded-3xl"
       >
         {visible ? (
           <iframe
             key={email}
             title="Erstgespräch buchen"
             src={calendlyEmbedUrl(p, email)}
-            className="h-[760px] w-full sm:h-[720px]"
+            className="h-[960px] w-full sm:h-[720px]"
           />
         ) : (
-          <div className="flex h-[760px] items-center justify-center text-sm text-muted-foreground sm:h-[720px]">
+          <div className="flex h-[960px] items-center justify-center text-sm text-muted-foreground sm:h-[720px]">
             Kalender wird geladen …
           </div>
         )}
@@ -613,6 +628,7 @@ const Landing = () => {
     };
   }, [p, b]);
   const [pastHero, setPastHero] = useState(false);
+  const [inBooking, setInBooking] = useState(false);
   const [email, setEmail] = useState("");
 
   const onBooked = (value: string) => {
@@ -630,7 +646,14 @@ const Landing = () => {
     if (!hero) return;
     const io = new IntersectionObserver(([entry]) => setPastHero(!entry.isIntersecting));
     io.observe(hero);
-    return () => io.disconnect();
+    // The sticky button has nothing to offer while the calendar itself is on screen.
+    const booking = document.getElementById("erstgespraech");
+    const io2 = new IntersectionObserver(([entry]) => setInBooking(entry.isIntersecting));
+    if (booking) io2.observe(booking);
+    return () => {
+      io.disconnect();
+      io2.disconnect();
+    };
   }, []);
 
   // /irgendwas is not an industry page.
@@ -869,7 +892,7 @@ const Landing = () => {
       <div
         className={cn(
           "fixed inset-x-0 bottom-0 z-20 border-t bg-white/95 px-4 pb-7 pt-3 transition-transform md:hidden",
-          pastHero ? "translate-y-0" : "translate-y-full",
+          pastHero && !inBooking ? "translate-y-0" : "translate-y-full",
         )}
       >
         <Button asChild size="xl" className="w-full">
