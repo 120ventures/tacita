@@ -456,7 +456,7 @@ export const content: LandingContent = {
     whoInterviews,
     {
       q: "Wie viel Zeit kostet mich das?",
-      a: "8–15 Gespräche à 15 Minuten über einige Wochen. Insgesamt meist unter vier Stunden, verteilt so, wie es in Ihren Alltag passt.",
+      a: "8–15 Gespräche à 15 Minuten, ein- bis zweimal pro Woche über zwei bis drei Monate, verteilt so, wie es in Ihren Alltag passt. Sie wählen die Zeiten oder rufen selbst an, wenn es gerade ruhig ist.",
     },
     {
       q: "Brauche ich eine App oder einen Computer?",
