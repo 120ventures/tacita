@@ -6,6 +6,9 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Karten reagieren auf die Maus
+- Die Interview-Karten im Hero und die Karten in den Abschnitten heben sich beim Darüberfahren leicht an, bekommen einen grünen Rand und einen weichen Schatten
+
 ### Eine Erstgespräch-Sektion statt zwei
 - Die Sektion „Jetzt starten“ mit der großen Erstgespräch-Karte ist weg; die „Enthalten“-Punkte stehen jetzt in der Buchungs-Sektion zwischen Andreas Vorstellung und dem Kalender
 - Der Menüpunkt heißt „Erstgespräch“ und springt direkt zum Kalender

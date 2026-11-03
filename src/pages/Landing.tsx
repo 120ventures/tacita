@@ -116,7 +116,12 @@ const SectionHeader = ({ pill, title, subtitle }: { pill: string; title: string;
 );
 
 const Card = ({ className, children }: { className?: string; children: ReactNode }) => (
-  <div className={cn("rounded-[18px] border bg-card p-5 shadow-[0_1px_1px_rgba(12,26,23,0.04)] sm:rounded-[20px] sm:p-8", className)}>
+  <div
+    className={cn(
+      "rounded-[18px] border bg-card p-5 shadow-[0_1px_1px_rgba(12,26,23,0.04)] transition-all duration-300 ease-out hover:-translate-y-1 hover:border-primary/60 hover:shadow-[0_20px_30px_rgba(11,154,114,0.14)] sm:rounded-[20px] sm:p-8",
+      className,
+    )}
+  >
     {children}
   </div>
 );
@@ -125,6 +130,8 @@ const FloatingCard = ({ className, children }: { className?: string; children: R
   <div
     className={cn(
       "absolute rounded-[14px] border bg-card px-3 py-2.5 shadow-[0_12px_16px_rgba(12,26,23,0.08)] sm:rounded-2xl sm:px-4 sm:py-3.5",
+      // Lift and glow a little on hover so the cards feel alive.
+      "transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.02] hover:border-primary/60 hover:shadow-[0_20px_30px_rgba(11,154,114,0.18)]",
       className,
     )}
   >
