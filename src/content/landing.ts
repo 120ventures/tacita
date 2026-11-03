@@ -402,7 +402,7 @@ export const trustPoints = [
   {
     icon: "Aa",
     title: "Mehrsprachig",
-    text: "Interviews auch auf Türkisch, BKS oder Polnisch. Dokumentiert wird auf Deutsch.",
+    text: "Interviews und Dossier in der Sprache, in der Sie am besten erzählen, zum Beispiel Deutsch, Türkisch oder BKS.",
   },
 ];
 
