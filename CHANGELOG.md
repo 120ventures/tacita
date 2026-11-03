@@ -6,6 +6,9 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Buttons „Kostenloses Erstgespräch“
+- Alle Buchungs-Buttons heißen jetzt „Kostenloses Erstgespräch“ und führen zum Kalender: im Menü, unter dem Hero, nach den drei Schritten, nach „Für wen“ und als Sticky-Button am Handy
+
 ### Schluss-Block und Beispiel-Dossier weg
 - Der dunkle Schluss-Block mit „Erstgespräch buchen“ und „Beispiel-Dossier ansehen“ ist entfernt, die Seite endet nach dem Kalender mit dem Footer
 - Der Button „Beispiel-Dossier“ im Menü ist weg (es gibt noch kein Beispiel-Dossier)

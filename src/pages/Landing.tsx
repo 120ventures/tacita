@@ -164,7 +164,7 @@ const Header = ({ v }: { v: LandingContent }) => (
         <Button asChild variant="ink" className="h-[34px] rounded-[9px] px-3 text-[13px] font-semibold sm:h-10 sm:rounded-[10px] sm:px-4 sm:text-sm">
           <a href={BOOK_HREF}>
             <span className="sm:hidden">Erstgespräch</span>
-            <span className="hidden sm:inline">Erstgespräch buchen</span>
+            <span className="hidden sm:inline">Kostenloses Erstgespräch</span>
           </a>
         </Button>
         <Sheet>
@@ -297,6 +297,13 @@ const Hero = ({ v }: { v: LandingContent }) => {
             <p className="pb-1.5 text-xs font-semibold text-primary">{c.status.label}</p>
             <p className="text-sm leading-[1.45] text-body">{c.status.text}</p>
           </FloatingCard>
+        </div>
+
+        <div className="mt-2 flex flex-col items-center gap-2 sm:mt-8">
+          <Button asChild size="xl">
+            <a href={BOOK_HREF}>Kostenloses Erstgespräch →</a>
+          </Button>
+          <p className="text-[13px] text-subtle">Wenige Minuten am Telefon, unverbindlich.</p>
         </div>
 
       </div>
@@ -752,9 +759,9 @@ const Landing = () => {
               );
             })}
           </ol>
-          <div className="mt-11 hidden justify-center md:flex">
+          <div className="mt-8 flex justify-center md:mt-11">
             <Button asChild variant="ink" size="xl">
-              <a href={BOOK_HREF}>Erstgespräch buchen</a>
+              <a href={BOOK_HREF}>Kostenloses Erstgespräch</a>
             </Button>
           </div>
         </Section>
@@ -892,6 +899,11 @@ const Landing = () => {
               );
             })}
           </div>
+          <div className="mt-8 flex justify-center md:mt-11">
+            <Button asChild size="xl">
+              <a href={BOOK_HREF}>Kostenloses Erstgespräch</a>
+            </Button>
+          </div>
         </Section>
 
         <Section muted>
@@ -939,7 +951,7 @@ const Landing = () => {
         )}
       >
         <Button asChild size="xl" className="w-full">
-          <a href={BOOK_HREF}>Erstgespräch buchen</a>
+          <a href={BOOK_HREF}>Kostenloses Erstgespräch</a>
         </Button>
       </div>
     </div>
