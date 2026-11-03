@@ -521,18 +521,24 @@ const SCENE_BARS = WAVE_BARS.filter((_, i) => i % 2 === 0);
 
 const SceneInterview = () => (
   <MiniCard>
-    <p className="flex items-center gap-1.5 text-xs font-semibold text-primary">
-      <span className="size-[7px] animate-pulse rounded-full bg-primary" />
-      Gespräch 4 von 10 · 07:12
-    </p>
-    <div aria-hidden className="mt-3 flex h-10 items-center gap-[3px]">
-      {SCENE_BARS.map((b, i) => (
-        <span
-          key={i}
-          className="tacita-wave-bar w-[4px] rounded-full"
-          style={{ height: `${b.height}%`, animationDuration: `${b.duration}s`, animationDelay: `${b.delay}s` }}
-        />
-      ))}
+    <div className="flex items-start gap-3">
+      {/* Wissbert thinking about the next question; figure is AI-generated, see Impressum. */}
+      <img src="/wissbert-denkt.jpg" alt="" aria-hidden className="h-[72px] w-auto shrink-0" />
+      <div className="min-w-0 flex-1">
+        <p className="flex items-center gap-1.5 text-xs font-semibold text-primary">
+          <span className="size-[7px] animate-pulse rounded-full bg-primary" />
+          Gespräch 4 von 10 · 07:12
+        </p>
+        <div aria-hidden className="mt-2 flex h-8 items-center gap-[3px]">
+          {SCENE_BARS.map((b, i) => (
+            <span
+              key={i}
+              className="tacita-wave-bar w-[4px] rounded-full"
+              style={{ height: `${b.height}%`, animationDuration: `${b.duration}s`, animationDelay: `${b.delay}s` }}
+            />
+          ))}
+        </div>
+      </div>
     </div>
     <p className="mt-3 rounded-lg bg-secondary px-3 py-2 text-xs leading-snug text-body">
       „Und wen rufen Sie an, wenn die Hebebühne ausfällt?“

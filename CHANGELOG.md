@@ -9,6 +9,7 @@ Overview of user-facing changes.
 ### Wissbert hat ein Gesicht
 - Im Chat-Mockup ist Wissbert jetzt die illustrierte Figur (grüner Interviewer mit Brille und Weste) statt des Sprechblasen-Zeichens
 - In der Karte „Fragen statt anrufen“ steht Wissbert einmal klein winkend mit Bildunterschrift: Name und Hinweis, dass die Figur KI-generiert ist (Google Gemini); derselbe Hinweis steht im Impressum
+- Bei Schritt 2 „Telefon-Interviews“ sitzt Wissbert nachdenklich neben der Tonspur
 - Beim Firmengedächtnis steht statt „QR-Codes an Maschinen“ jetzt „Jede Antwort mit Quelle“
 
 ### Handy-Mockup des Firmengedächtnisses
