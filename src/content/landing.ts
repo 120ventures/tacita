@@ -482,7 +482,7 @@ export const content: LandingContent = {
     note: "Termin wählen, fertig. Sie bekommen sofort eine Bestätigung per E-Mail, kein Rückruf nötig.",
     host: {
       name: "Andrea Buttinger",
-      role: "120 Ventures, Wien",
+      role: "Tacita, Wien",
       line: "Das Gespräch führen Sie mit mir. Ich höre zu, stelle Fragen und sage Ihnen ehrlich, ob Tacita für Sie passt.",
       image: "/andrea.jpg",
     },
