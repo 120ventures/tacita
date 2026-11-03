@@ -361,7 +361,7 @@ const Hero = ({ v, onBooked }: { v: LandingContent; onBooked: (email: string) =>
   );
 };
 
-const VideoBand = ({ v, image, imageAlt }: { v: LandingContent; image?: string; imageAlt?: string }) => {
+const VideoBand = ({ v, image, imageAlt, imagePosition }: { v: LandingContent; image?: string; imageAlt?: string; imagePosition?: string }) => {
   const ref = useRef<HTMLVideoElement>(null);
   // Industry pages show a photo; until the file exists the default video stays.
   const [imageFailed, setImageFailed] = useState(false);
@@ -379,7 +379,8 @@ const VideoBand = ({ v, image, imageAlt }: { v: LandingContent; image?: string; 
           <img
             src={image}
             alt={imageAlt ?? ""}
-            className="absolute inset-0 size-full object-cover object-[62%_center]"
+            className="absolute inset-0 size-full object-cover"
+            style={{ objectPosition: imagePosition ?? "62% center" }}
             onError={() => setImageFailed(true)}
           />
         ) : (
@@ -747,7 +748,7 @@ const Landing = () => {
           </div>
         </Section>
 
-        <VideoBand v={v} image={b?.image} imageAlt={b?.imageAlt} />
+        <VideoBand v={v} image={b?.image} imageAlt={b?.imageAlt} imagePosition={b?.imagePosition} />
 
         <Section id="ablauf">
           <SectionHeader pill="So funktioniert’s" title="In drei Schritten zur sicheren Übergabe" />

@@ -79,6 +79,8 @@ export interface BranchePreset {
   subline: string;
   image: string;
   imageAlt: string;
+  /** CSS object-position: keeps the face in view when the band is cropped (wide on desktop, tall on phones). */
+  imagePosition: string;
   question: string;
   mobileQuestion: string;
   quoteLabel: string;
@@ -100,6 +102,7 @@ export const branchen: Record<string, BranchePreset> = {
     subline:
       "Stammkunden, Lieferanten, Pickerl-Routine, die Eigenheiten jeder Hebebühne: Tacita interviewt Sie am Telefon über alles, was nur Sie wissen, und macht daraus ein Übergabe-Dossier für Ihre Nachfolge.",
     image: "/branchen/kfz.jpg",
+    imagePosition: "58% 22%",
     imageAlt: "Mechaniker in einer Kfz-Werkstatt am Telefon",
     question: "Erzählen Sie mir vom letzten Mal, als Großkunde Huber unzufrieden war. Was haben Sie gemacht?",
     mobileQuestion: "Wann war Großkunde Huber zuletzt unzufrieden?",
@@ -139,6 +142,7 @@ export const branchen: Record<string, BranchePreset> = {
     subline:
       "Welche Heizung im Gemeindeamt zickt, welche Hausverwaltung sofort zahlt, wo der Absperrhahn im Altbau sitzt: Tacita interviewt Sie am Telefon und macht daraus ein Übergabe-Dossier für Ihre Nachfolge.",
     image: "/branchen/installateur.jpg",
+    imagePosition: "66% 18%",
     imageAlt: "Installateur im Heizungskeller am Telefon",
     question: "Welche Anlage im Bestand macht am meisten Ärger, und was wissen nur Sie darüber?",
     mobileQuestion: "Welche Anlage macht am meisten Ärger?",
@@ -178,6 +182,7 @@ export const branchen: Record<string, BranchePreset> = {
     subline:
       "Wie Sie eine Küche kalkulieren, welcher Furnierlieferant nicht wirft, welcher Architekt immer Sonderwünsche hat: Tacita interviewt Sie am Telefon und macht daraus ein Übergabe-Dossier für Ihre Nachfolge.",
     image: "/branchen/tischler.jpg",
+    imagePosition: "58% 22%",
     imageAlt: "Tischlermeister in der Werkstatt am Telefon",
     question: "Wie kalkulieren Sie eine Einbauküche, bei der der Kunde noch nicht weiß, was er will?",
     mobileQuestion: "Wie kalkulieren Sie eine unklare Küche?",
@@ -217,6 +222,7 @@ export const branchen: Record<string, BranchePreset> = {
     subline:
       "Rezepturen, Lieferanten, Stammtische, Saisonplanung: Was nur Sie und Ihre Küche wissen, interviewt Tacita am Telefon und macht daraus ein Übergabe-Dossier für Ihre Nachfolge oder Ihren Käufer.",
     image: "/branchen/gastro.jpg",
+    imagePosition: "56% 12%",
     imageAlt: "Wirtin in der Gaststube am Telefon",
     question: "Was passiert in der Küche, wenn Sie eine Woche nicht da sind? Wo hakt es zuerst?",
     mobileQuestion: "Was hakt zuerst, wenn Sie nicht da sind?",
@@ -256,6 +262,7 @@ export const branchen: Record<string, BranchePreset> = {
     subline:
       "Lieferantenkonditionen, Sortiment, Schlüsselkunden, Saison: Tacita interviewt Sie am Telefon über alles, was nur Sie wissen, und macht daraus ein Übergabe-Dossier für Ihre Nachfolge oder Ihren Käufer.",
     image: "/branchen/handel.jpg",
+    imagePosition: "62% 18%",
     imageAlt: "Inhaber eines Fachgeschäfts im Laden am Telefon",
     question: "Welche Konditionen haben Sie mit Ihren drei wichtigsten Lieferanten ausgehandelt, und warum?",
     mobileQuestion: "Welche Konditionen haben Ihre Top-3-Lieferanten?",

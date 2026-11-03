@@ -6,6 +6,10 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Bildausschnitte
+- Die Branchenfotos im Band haben jetzt pro Branche einen festen Ausschnitt, damit am Desktop und am Handy der Kopf im Bild bleibt
+- Der Wissbert-Avatar im Chat zeigt die ganzen Ohren
+
 ### Neuer Calendly-Termin
 - Der eingebettete Kalender zeigt jetzt das Tacita-Erstgespräch statt des alten Nutriful-Termins
 
