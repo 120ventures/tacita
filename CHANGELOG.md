@@ -6,6 +6,9 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Hero ohne E-Mail-Feld
+- Das E-Mail-Feld mit Button unter der Tonspur ist weg; gebucht wird über den Button oben rechts, den Sticky-Button am Handy oder direkt im Kalender
+
 ### Bildausschnitte
 - Die Branchenfotos im Band haben jetzt pro Branche einen festen Ausschnitt, damit am Desktop und am Handy der Kopf im Bild bleibt
 - Der Wissbert-Avatar im Chat zeigt die ganzen Ohren

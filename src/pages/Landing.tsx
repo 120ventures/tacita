@@ -21,7 +21,6 @@ import {
 } from "@/content/landing";
 import { isBranche, readPersonalization, type Personalization } from "@/lib/personalize";
 import NotFound from "./NotFound";
-import { saveLead } from "@/integrations/supabase/leads";
 
 // The calendar is embedded on the page, so every booking button jumps to it.
 const BOOK_HREF = "#erstgespraech";
@@ -191,39 +190,6 @@ const Header = ({ v }: { v: LandingContent }) => (
   </header>
 );
 
-const EmailBooking = ({ placeholder, onBooked }: { placeholder: string; onBooked: (email: string) => void }) => {
-  const [email, setEmail] = useState("");
-
-  const submit = (e: FormEvent) => {
-    e.preventDefault();
-    // The lead is stored in the background; the visitor goes straight to the calendar.
-    onBooked(email);
-    document.getElementById("erstgespraech")?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  return (
-    <form
-      onSubmit={submit}
-      className="flex w-full max-w-[560px] flex-col gap-2.5 sm:flex-row sm:items-center sm:gap-0 sm:rounded-2xl sm:border sm:border-primary sm:bg-card sm:py-1.5 sm:pl-5 sm:pr-1.5 sm:shadow-[0_0_0_6px_rgba(11,154,114,0.08)]"
-    >
-      <label htmlFor="hero-email" className="sr-only">
-        E-Mail-Adresse
-      </label>
-      <input
-        id="hero-email"
-        type="email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder={placeholder}
-        className="h-[50px] rounded-[14px] border border-primary bg-card px-4 text-[15px] shadow-[0_0_0_5px_rgba(11,154,114,0.08)] outline-none placeholder:text-subtle sm:h-auto sm:flex-1 sm:rounded-none sm:border-0 sm:bg-transparent sm:px-0 sm:shadow-none"
-      />
-      <Button type="submit" size="xl">
-        Erstgespräch buchen →
-      </Button>
-    </form>
-  );
-};
-
 // Bar heights for the voice waveform: loud in the middle, quieter at the edges, a little irregular like speech.
 const WAVE_BAR_COUNT = 29;
 const WAVE_BARS = Array.from({ length: WAVE_BAR_COUNT }, (_, i) => {
@@ -254,7 +220,7 @@ const VoiceWave = () => (
   </div>
 );
 
-const Hero = ({ v, onBooked }: { v: LandingContent; onBooked: (email: string) => void }) => {
+const Hero = ({ v }: { v: LandingContent }) => {
   const c = v.heroCards;
   return (
     <section id="hero" className="relative overflow-hidden px-5 pb-8 pt-6 sm:px-10 sm:pb-14 sm:pt-[72px]">
@@ -334,11 +300,7 @@ const Hero = ({ v, onBooked }: { v: LandingContent; onBooked: (email: string) =>
           </FloatingCard>
         </div>
 
-        <div className="mt-1.5 flex w-full justify-center sm:mt-8">
-          <EmailBooking placeholder={v.emailPlaceholder} onBooked={onBooked} />
-        </div>
-
-        <ul className="mt-5 hidden flex-wrap justify-center gap-x-7 gap-y-2 text-sm text-muted-foreground md:flex">
+        <ul className="mt-6 hidden flex-wrap justify-center gap-x-7 gap-y-2 text-sm text-muted-foreground md:flex">
           {v.heroProof.map((p) => (
             <li key={p} className="flex items-center gap-1.5">
               <Check className="text-[13px]" />
@@ -691,12 +653,6 @@ const Landing = () => {
   }, [p, b]);
   const [pastHero, setPastHero] = useState(false);
   const [inBooking, setInBooking] = useState(false);
-  const [email, setEmail] = useState("");
-
-  const onBooked = (value: string) => {
-    setEmail(value);
-    if (value) void saveLead({ email: value, name: p.name, branche: p.branche, ref: p.von });
-  };
 
   useEffect(() => {
     document.title = v.title;
@@ -726,7 +682,7 @@ const Landing = () => {
       <Header v={v} />
 
       <main>
-        <Hero v={v} onBooked={onBooked} />
+        <Hero v={v} />
 
         <Section muted>
           <SectionHeader pill="Das Problem" title={v.problem.title} subtitle={v.problem.subtitle} />
@@ -894,7 +850,7 @@ const Landing = () => {
           </div>
         </Section>
 
-        <Booking v={v} p={p} email={email} />
+        <Booking v={v} p={p} email="" />
 
         <section id="kontakt" className="scroll-mt-20 px-5 pt-10 sm:px-10 sm:pt-16 lg:px-16">
           <div className="relative mx-auto max-w-[1312px] overflow-hidden rounded-3xl bg-foreground px-6 py-14 text-center sm:rounded-[32px] sm:py-[88px]">
