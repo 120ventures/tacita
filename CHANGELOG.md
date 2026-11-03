@@ -6,6 +6,11 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Band früher, Gehirn im Problem-Abschnitt
+- Das Band mit Video bzw. Branchenfoto steht jetzt direkt unter dem Hero, vor „Das Problem“
+- Unter „Das wichtigste Wissen Ihres Betriebs steht nirgends“ pulsiert ein Gehirn, aus dem Wissens-Chips wie „Kunde Huber“ oder „Lieferant Linz“ nach rechts driften und verblassen; bei reduzierter Bewegung steht das Bild still
+- Neue FAQ-Frage „Woher kommt der Name Tacita?“ (tacit knowledge, stilles Wissen)
+
 ### Hero ohne E-Mail-Feld
 - Das E-Mail-Feld mit Button unter der Tonspur ist weg; gebucht wird über den Button oben rechts, den Sticky-Button am Handy oder direkt im Kalender
 

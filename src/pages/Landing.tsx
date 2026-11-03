@@ -1,7 +1,7 @@
 import { useEffect, useId, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { FileText, Menu, Mic, Phone, Search, SendHorizontal } from "lucide-react";
+import { Brain, FileText, Menu, Mic, Phone, Search, SendHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
@@ -442,6 +442,40 @@ const PhoneChat = ({ chat }: { chat: ChatDemo }) => (
   </div>
 );
 
+// Problem section: a brain with pulsing knowledge, and bits of it drifting away. Decorative only.
+const DRIFT_CHIPS = ["Kunde Huber", "Lieferant Linz", "Kalkulation", "Wartungsfalle"];
+const BrainScene = () => (
+  <div aria-hidden className="relative mx-auto mt-8 h-[150px] w-[320px] sm:mt-10 sm:w-[420px]">
+    <div
+      className="tacita-glow absolute left-[40px] top-1/2 size-[200px] -translate-y-1/2 rounded-full sm:left-[80px]"
+      style={{ "--glow": "rgba(79,209,165,0.35)" } as CSSProperties}
+    />
+    <Brain className="absolute left-[72px] top-1/2 size-[104px] -translate-y-1/2 text-primary sm:left-[112px]" strokeWidth={1.4} />
+    {[
+      [100, 48],
+      [128, 62],
+      [112, 86],
+      [142, 92],
+      [122, 110],
+    ].map(([x, y], i) => (
+      <span
+        key={i}
+        className="tacita-pulse absolute size-2 rounded-full bg-primary sm:ml-10"
+        style={{ left: x, top: y, animationDelay: `${i * 0.5}s` }}
+      />
+    ))}
+    {DRIFT_CHIPS.map((c, i) => (
+      <span
+        key={c}
+        className="tacita-drift absolute left-[176px] rounded-full border bg-card px-2.5 py-1 text-[11px] font-medium text-muted-foreground shadow-sm sm:left-[216px] sm:text-xs"
+        style={{ top: 28 + i * 30, animationDelay: `${i * 1.6}s` }}
+      >
+        {c}
+      </span>
+    ))}
+  </div>
+);
+
 // Small scenes for the three steps: a booked call, a running interview, the finished dossier.
 const MiniCard = ({ className, children }: { className?: string; children: ReactNode }) => (
   <div className={cn("w-full max-w-[260px] rounded-xl border bg-card p-4 shadow-[0_8px_16px_rgba(12,26,23,0.06)]", className)}>
@@ -684,9 +718,12 @@ const Landing = () => {
       <main>
         <Hero v={v} />
 
+        <VideoBand v={v} image={b?.image} imageAlt={b?.imageAlt} imagePosition={b?.imagePosition} />
+
         <Section muted>
           <SectionHeader pill="Das Problem" title={v.problem.title} subtitle={v.problem.subtitle} />
-          <div className="mt-6 grid gap-3 sm:mt-14 sm:gap-5 md:grid-cols-3">
+          <BrainScene />
+          <div className="mt-6 grid gap-3 sm:mt-10 sm:gap-5 md:grid-cols-3">
             {v.problem.points.map((p, i) => (
               <Card key={p.stat}>
                 <p
@@ -703,8 +740,6 @@ const Landing = () => {
             ))}
           </div>
         </Section>
-
-        <VideoBand v={v} image={b?.image} imageAlt={b?.imageAlt} imagePosition={b?.imagePosition} />
 
         <Section id="ablauf">
           <SectionHeader pill="So funktioniert’s" title="In drei Schritten zur sicheren Übergabe" />

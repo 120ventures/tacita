@@ -468,6 +468,10 @@ export const content: LandingContent = {
       a: "Das besprechen wir im Erstgespräch, abhängig von der Größe Ihres Betriebs und der Zahl der Gespräche. Das Erstgespräch selbst ist kostenlos.",
     },
     {
+      q: "Woher kommt der Name Tacita?",
+      a: "Von „tacit knowledge“, dem stillen Wissen: alles, was man kann und weiß, aber nie aufgeschrieben hat. Genau dieses Wissen holt Tacita aus dem Kopf in ein Dossier. Tacita war außerdem in Rom die Göttin der Stille.",
+    },
+    {
       q: "Gibt es Förderungen?",
       a: "Für Betriebsübergaben gibt es in mehreren Bundesländern Beratungsförderungen. Wir prüfen im Erstgespräch, ob Ihr Fall infrage kommt, und helfen beim Antrag.",
     },
