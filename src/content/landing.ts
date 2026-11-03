@@ -363,22 +363,28 @@ export const steps = [
 // One offer, one price (see founding). These cards only show the three ways a hand-over happens.
 export const handoverCases = [
   {
+    key: "sale" as const,
     eyebrow: "Verkauf",
     title: "Verkauf an Dritte",
+    to: "Käufer & Bank",
     text: "Käufer, Bank und Steuerberatung sehen im Dossier, dass der Betrieb ohne Sie läuft. Das stützt den Preis.",
-    focus: "Kunden, Lieferanten, Kalkulation",
+    focus: ["Kunden", "Lieferanten", "Kalkulation"],
   },
   {
+    key: "family" as const,
     eyebrow: "Familie",
     title: "Übergabe in der Familie",
-    text: "Die nächste Generation kennt den Betrieb, aber nicht jede Absprache. Das Archiv ersetzt das ständige Nachfragen.",
-    focus: "Absprachen, Eigenheiten, Ansprechpartner",
+    to: "Tochter oder Sohn",
+    text: "Die nächste Generation kennt den Betrieb, aber nicht jede Absprache. Das Firmengedächtnis ersetzt das ständige Nachfragen.",
+    focus: ["Absprachen", "Eigenheiten", "Ansprechpartner"],
   },
   {
+    key: "team" as const,
     eyebrow: "Team",
     title: "Übergabe im Team",
+    to: "Meister oder Büroleitung",
     text: "Wenn der Meister oder die Büroleitung übernimmt, steht alles an einem Ort, was bisher nur über Ihren Schreibtisch lief.",
-    focus: "Büro, Behörden, Bank, Verträge",
+    focus: ["Büro", "Behörden", "Bank", "Verträge"],
   },
 ];
 

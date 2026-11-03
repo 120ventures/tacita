@@ -1,7 +1,7 @@
 import { useEffect, useId, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { Brain, FileText, Menu, Mic, Phone, Search, SendHorizontal } from "lucide-react";
+import { ArrowRight, Brain, FileText, HardHat, Landmark, Menu, Mic, Phone, Search, SendHorizontal, User, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
@@ -124,6 +124,9 @@ const Card = ({ className, children }: { className?: string; children: ReactNode
     {children}
   </div>
 );
+
+// Who takes over in each hand-over case (the "Für wen" cards).
+const HANDOVER_ICONS = { sale: Landmark, family: Users, team: HardHat } as const;
 
 const FloatingCard = ({ className, children }: { className?: string; children: ReactNode }) => (
   <div
@@ -842,16 +845,51 @@ const Landing = () => {
         <Section id="fuer-wen">
           <SectionHeader pill="Für wen" title="Für jede Art der Übergabe" />
           <div className="mt-6 grid gap-3 sm:mt-14 sm:gap-5 md:grid-cols-3">
-            {handoverCases.map((a) => (
-              <Card key={a.title} className="flex flex-col">
-                <p className="text-[13px] font-semibold text-primary">{a.eyebrow}</p>
-                <h3 className="pt-3.5 text-2xl font-bold tracking-[-0.5px]">{a.title}</h3>
-                <p className="flex-1 pt-3 text-base leading-[1.55] text-muted-foreground">{a.text}</p>
-                <p className="mt-7 border-t pt-5 text-[15px] text-muted-foreground">
-                  <span className="font-semibold text-foreground">Im Dossier:</span> {a.focus}
-                </p>
-              </Card>
-            ))}
+            {handoverCases.map((a) => {
+              const To = HANDOVER_ICONS[a.key];
+              return (
+                <Card key={a.title} className="flex flex-col overflow-hidden !p-0">
+                  {/* Scene: you, the dossier, and whoever takes over */}
+                  <div className="relative flex items-center justify-between bg-gradient-to-br from-accent via-accent/60 to-card px-6 py-6 sm:px-7">
+                    <div className="flex flex-col items-center gap-1.5">
+                      <span className="flex size-12 items-center justify-center rounded-full border-2 border-primary bg-card text-primary">
+                        <User className="size-5" />
+                      </span>
+                      <span className="text-[11px] font-semibold text-muted-foreground">Sie</span>
+                    </div>
+                    <div className="flex flex-1 items-center justify-center gap-1.5 px-2 text-primary">
+                      <span className="h-px flex-1 bg-primary/30" />
+                      <span className="inline-flex items-center gap-1 rounded-full bg-card px-2.5 py-1 text-[11px] font-semibold shadow-sm">
+                        <FileText className="size-3" />
+                        Dossier
+                      </span>
+                      <ArrowRight className="size-4" />
+                    </div>
+                    <div className="flex flex-col items-center gap-1.5">
+                      <span className="flex size-12 items-center justify-center rounded-full bg-primary text-white shadow-[0_8px_16px_rgba(11,154,114,0.3)]">
+                        <To className="size-5" />
+                      </span>
+                      <span className="max-w-[88px] text-center text-[11px] font-semibold leading-tight text-muted-foreground">{a.to}</span>
+                    </div>
+                  </div>
+                  <div className="flex flex-1 flex-col p-[22px] pt-5 sm:p-8 sm:pt-6">
+                    <p className="text-[13px] font-semibold text-primary">{a.eyebrow}</p>
+                    <h3 className="pt-2 text-2xl font-bold tracking-[-0.5px]">{a.title}</h3>
+                    <p className="flex-1 pt-3 text-base leading-[1.55] text-muted-foreground">{a.text}</p>
+                    <div className="mt-6 border-t pt-5">
+                      <p className="text-[12px] font-semibold uppercase tracking-[0.08em] text-subtle">Im Dossier</p>
+                      <div className="flex flex-wrap gap-1.5 pt-2.5">
+                        {a.focus.map((f) => (
+                          <span key={f} className="rounded-full border bg-secondary px-2.5 py-1 text-[13px] text-body">
+                            {f}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </Card>
+              );
+            })}
           </div>
         </Section>
 

@@ -6,6 +6,10 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### „Für wen“ neu gestaltet
+- Jede der drei Karten zeigt oben eine kleine Szene: Sie, das Dossier, und wer übernimmt (Käufer und Bank, Tochter oder Sohn, Meister oder Büroleitung), mit Icons auf grünem Verlauf
+- „Im Dossier“ steht als Chips statt als Fließtext
+
 ### Hero ohne Checkliste
 - Die drei Häkchen-Punkte unter der Tonspur („Nur telefonieren, keine App“ usw.) sind auf allen Seiten weg
 
