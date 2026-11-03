@@ -294,7 +294,7 @@ export const navLinks = [
   { label: "So funktioniert’s", href: "#ablauf" },
   { label: "Ergebnis", href: "#ergebnis" },
   { label: "Für wen", href: "#fuer-wen" },
-  { label: "Jetzt starten", href: "#start" },
+  { label: "Erstgespräch", href: "#erstgespraech" },
   { label: "FAQ", href: "#faq" },
 ];
 
@@ -359,7 +359,7 @@ export const trustPoints = [
 ];
 
 export const foundingIncludes = [
-  "Jedes Gespräch auf Ihren Betrieb vorbereitet",
+  "Jedes Interview auf Ihren Betrieb vorbereitet",
   "Persönliche Begleitung durch das Team",
   "Start der Interviews innerhalb von 2 Wochen",
   "Übergabe-Dossier für Käufer, Bank und Nachfolge",

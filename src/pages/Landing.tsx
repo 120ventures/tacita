@@ -9,7 +9,6 @@ import siteCallVideo from "@/assets/site-call.mp4";
 import siteCallPoster from "@/assets/site-call-poster.jpg";
 import {
   CALENDLY_URL,
-  DEPOSIT_URL,
   branchen,
   handoverCases,
   foundingIncludes,
@@ -26,23 +25,6 @@ import { saveLead } from "@/integrations/supabase/leads";
 
 // The calendar is embedded on the page, so every booking button jumps to it.
 const BOOK_HREF = "#erstgespraech";
-// With a payment link the start section offers the deposit; without it only the booking.
-const FoundingButtons = () =>
-  DEPOSIT_URL ? (
-    <>
-      <Button asChild size="xl" className="w-full">
-        <a href={DEPOSIT_URL}>Platz sichern</a>
-      </Button>
-      <Button asChild size="xl" variant="outline" className="w-full">
-        <a href={BOOK_HREF}>Erst Erstgespräch buchen</a>
-      </Button>
-    </>
-  ) : (
-    <Button asChild size="xl" className="w-full">
-      <a href={BOOK_HREF}>Erstgespräch buchen</a>
-    </Button>
-  );
-
 // Calendly prefills name and email from the query string; the rest is styling and tracking.
 const calendlyEmbedUrl = (p: Personalization, email: string) => {
   const url = new URL(CALENDLY_URL);
@@ -634,9 +616,17 @@ const Booking = ({ v, p, email }: { v: LandingContent; p: Personalization; email
           <p className="pt-0.5 text-sm leading-[1.5] text-muted-foreground">{v.booking.host.line}</p>
         </div>
       </div>
+      <ul className="mx-auto mt-4 grid max-w-[640px] gap-x-6 gap-y-2 px-1 text-left text-[13.5px] text-body sm:grid-cols-2 sm:text-[15px]">
+        {foundingIncludes.map((f) => (
+          <li key={f} className="flex gap-2.5">
+            <Check />
+            {f}
+          </li>
+        ))}
+      </ul>
       <div
         ref={ref}
-        className="mx-auto mt-4 w-full max-w-[1000px] overflow-hidden rounded-[20px] border bg-card sm:mt-6 sm:rounded-3xl"
+        className="mx-auto mt-6 w-full max-w-[1000px] overflow-hidden rounded-[20px] border bg-card sm:mt-8 sm:rounded-3xl"
       >
         {visible ? (
           <iframe
@@ -886,52 +876,6 @@ const Landing = () => {
                 <p className="pt-2 text-[15px] leading-[1.55] text-muted-foreground">{t.text}</p>
               </Card>
             ))}
-          </div>
-        </Section>
-
-        <Section id="start">
-          <SectionHeader pill={v.founding.pill} title={v.founding.title} subtitle={v.founding.subtitle} />
-          <div className="mt-[18px] flex justify-center sm:mt-14">
-            <div className="tacita-ring w-full max-w-[760px] rounded-[22px] p-0.5 shadow-[0_30px_40px_rgba(11,154,114,0.18)] sm:rounded-[28px] sm:p-[3px]">
-              <div className="flex flex-col gap-4 rounded-[20px] bg-card p-[22px] sm:rounded-[25px] sm:p-12 md:flex-row md:gap-12">
-                <div className="flex-1">
-                  <span className="inline-flex rounded-full bg-accent px-2.5 py-1 text-[11px] font-semibold text-primary sm:px-3 sm:text-xs">
-                    {v.founding.badge}
-                  </span>
-                  <p className="mt-3 flex items-baseline gap-2 font-bold tracking-[-1.8px] sm:mt-[18px] sm:tracking-[-2.5px]">
-                    {v.founding.pricePrefix && (
-                      <span className="text-sm font-medium tracking-normal text-muted-foreground sm:text-[17px]">
-                        {v.founding.pricePrefix}
-                      </span>
-                    )}
-                    <span className="text-[46px] leading-none sm:text-[64px]">{v.founding.price}</span>
-                  </p>
-                  <p className="pt-2 text-sm text-muted-foreground sm:text-[15px]">{v.founding.priceUnit}</p>
-                  {v.founding.deposit && (
-                    <p className="pt-2.5 text-[13px] leading-[1.45] text-muted-foreground sm:pt-3.5 sm:text-[15px] sm:leading-[1.5]">
-                      {v.founding.deposit}
-                    </p>
-                  )}
-                  <div className="hidden flex-col gap-2.5 pt-7 md:flex">
-                    <FoundingButtons />
-                  </div>
-                </div>
-                <div className="flex-1 border-t pt-3.5 md:border-l md:border-t-0 md:pl-12 md:pt-0">
-                  <h3 className="hidden text-[15px] font-semibold md:block">Enthalten</h3>
-                  <ul className="flex flex-col gap-2.5 md:gap-3.5 md:pt-4">
-                    {foundingIncludes.map((f) => (
-                      <li key={f} className="flex gap-2.5 text-[13.5px] text-body md:text-[15px]">
-                        <Check />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="flex flex-col gap-2.5 md:hidden">
-                  <FoundingButtons />
-                </div>
-              </div>
-            </div>
           </div>
         </Section>
 

@@ -6,6 +6,10 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Eine Erstgespräch-Sektion statt zwei
+- Die Sektion „Jetzt starten“ mit der großen Erstgespräch-Karte ist weg; die „Enthalten“-Punkte stehen jetzt in der Buchungs-Sektion zwischen Andreas Vorstellung und dem Kalender
+- Der Menüpunkt heißt „Erstgespräch“ und springt direkt zum Kalender
+
 ### Wissbert hat ein Gesicht
 - Im Chat-Mockup ist Wissbert jetzt die illustrierte Figur (grüner Interviewer mit Brille und Weste) statt des Sprechblasen-Zeichens
 - In der Karte „Fragen statt anrufen“ steht Wissbert einmal klein winkend mit Bildunterschrift: Name und Hinweis, dass die Figur KI-generiert ist (Google Gemini); derselbe Hinweis steht im Impressum
