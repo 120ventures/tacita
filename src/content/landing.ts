@@ -527,9 +527,8 @@ export const content: LandingContent = {
   },
   booking: {
     pill: "Kostenloses Erstgespräch",
-    title: "In 20 Minuten wissen Sie, ob es passt",
-    subtitle:
-      "Ein kurzes Telefonat, kostenlos und unverbindlich: Wir klären, welches Wissen bei Ihrer Übergabe gesichert werden muss, und Sie bekommen eine ehrliche Einschätzung, ob Tacita für Ihren Betrieb Sinn macht.",
+    title: "In wenigen Minuten wissen Sie, ob es passt",
+    subtitle: "Kurzes Telefonat, kostenlos und unverbindlich.",
     personal: "{von} hat Ihnen diesen Link geschickt. Wählen Sie einfach eine Zeit, die Ihnen passt.",
     note: "Termin wählen, fertig. Sie bekommen sofort eine Bestätigung per E-Mail, kein Rückruf nötig.",
     host: {
