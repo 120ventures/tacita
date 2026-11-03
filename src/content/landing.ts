@@ -432,7 +432,7 @@ export const content: LandingContent = {
     title: "Das Firmengedächtnis",
     points: [
       "Durchsuchbar: Frage stellen, Antwort in Ihren Worten",
-      "QR-Codes an Maschinen und Fahrzeugen",
+      "Jede Antwort mit Quelle: aus welchem Gespräch sie stammt",
       "Wissens-Hotline für die ersten Monate",
     ],
   },

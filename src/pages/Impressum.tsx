@@ -62,6 +62,10 @@ const Impressum = () => {
               </li>
             ))}
           </ul>
+          <p className="mt-3">
+            Die Figur „Wissbert“ (Interviewer, Avatar im Chat) ist eine KI-generierte Illustration, erstellt mit Google
+            Gemini im Auftrag der 120 Ventures GmbH. Sie stellt keine reale Person dar.
+          </p>
         </section>
 
         <section className="mt-10 text-[15px] leading-[1.6] text-body">

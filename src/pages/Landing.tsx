@@ -434,33 +434,10 @@ const VideoBand = ({ v, image, imageAlt }: { v: LandingContent; image?: string; 
   );
 };
 
-// Wissbert's mark: the voice bars of the logo inside a speech bubble, Tacita green.
-const WissbertMark = ({ className }: { className?: string }) => {
-  const gradientId = useId();
-  return (
-    <svg viewBox="0 0 40 40" className={className} aria-hidden>
-      <defs>
-        <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#4fd1a5" />
-          <stop offset="1" stopColor="#0b9a72" />
-        </linearGradient>
-      </defs>
-      <path
-        d="M20 3c9.4 0 17 6.6 17 14.8S29.4 32.6 20 32.6c-1.6 0-3.1-.2-4.6-.5L8 36.5l1.7-6.6C5.5 27.2 3 22.8 3 17.8 3 9.6 10.6 3 20 3z"
-        fill={`url(#${gradientId})`}
-      />
-      {[
-        [11.5, 15.5, 5],
-        [15.5, 12.5, 11],
-        [19.5, 10, 16],
-        [23.5, 13, 10],
-        [27.5, 15.5, 5],
-      ].map(([x, y, h]) => (
-        <rect key={x} x={x} y={y} width="2.4" height={h} rx="1.2" fill="#fff" />
-      ))}
-    </svg>
-  );
-};
+// Wissbert, the interviewer, as a round avatar. Figure is AI-generated (Google Gemini); credited in the Impressum.
+const WissbertAvatar = ({ className }: { className?: string }) => (
+  <img src="/wissbert-avatar.jpg" alt="Wissbert" className={cn("rounded-full object-cover", className)} />
+);
 
 // Phone mockup: the successor asks the company memory, Wissbert answers in the owner's words.
 const PhoneChat = ({ chat }: { chat: ChatDemo }) => (
@@ -468,7 +445,7 @@ const PhoneChat = ({ chat }: { chat: ChatDemo }) => (
     <div className="relative overflow-hidden rounded-[34px] bg-background">
       <div className="absolute left-1/2 top-2 h-5 w-24 -translate-x-1/2 rounded-full bg-[#0c1a17]" />
       <div className="flex items-center gap-2.5 border-b px-4 pb-3 pt-9">
-        <WissbertMark className="size-9" />
+        <WissbertAvatar className="size-9" />
         <div className="min-w-0">
           <p className="flex items-center gap-1.5 text-[13px] font-semibold">
             Wissbert
@@ -486,7 +463,7 @@ const PhoneChat = ({ chat }: { chat: ChatDemo }) => (
       <div className="flex flex-col gap-2.5 px-4 pb-3 pt-3 text-[12.5px] leading-[1.4]">
         <p className="ml-8 self-end rounded-2xl rounded-br-md bg-primary px-3 py-2 text-white">{chat.q1}</p>
         <div className="mr-6 flex items-end gap-1.5">
-          <WissbertMark className="size-5 shrink-0" />
+          <WissbertAvatar className="size-5 shrink-0" />
           <div>
             <p className="rounded-2xl rounded-bl-md bg-secondary px-3 py-2 text-body">{chat.a1}</p>
             <p className="pl-1 pt-1 text-[10px] text-subtle">Quelle: {chat.source1}</p>
@@ -494,7 +471,7 @@ const PhoneChat = ({ chat }: { chat: ChatDemo }) => (
         </div>
         <p className="ml-8 self-end rounded-2xl rounded-br-md bg-primary px-3 py-2 text-white">{chat.q2}</p>
         <div className="mr-6 flex items-end gap-1.5">
-          <WissbertMark className="size-5 shrink-0" />
+          <WissbertAvatar className="size-5 shrink-0" />
           <p className="flex items-center gap-1 rounded-2xl rounded-bl-md bg-secondary px-3 py-2.5">
             {[0, 1, 2].map((i) => (
               <span key={i} className="size-1.5 animate-pulse rounded-full bg-subtle" style={{ animationDelay: `${i * 200}ms` }} />
@@ -861,6 +838,13 @@ const Landing = () => {
                   </li>
                 ))}
               </ul>
+              <figure className="mt-6 flex items-center gap-4 sm:mt-8">
+                <img src="/wissbert.jpg" alt="Wissbert, der Interviewer von Tacita" className="h-24 w-auto sm:h-28" />
+                <figcaption className="text-[12px] leading-[1.45] text-subtle sm:text-[13px]">
+                  Das ist <span className="font-semibold text-muted-foreground">Wissbert</span>, der Interviewer von
+                  Tacita. Die Figur ist KI-generiert (Google Gemini).
+                </figcaption>
+              </figure>
             </div>
             <div className="order-1 md:order-2">
               <PhoneChat chat={v.chat} />
