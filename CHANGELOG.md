@@ -6,6 +6,11 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Handy-Mockup des Firmengedächtnisses
+- Im Abschnitt „Ergebnis“ zeigt ein Handy, wie die Nachfolge Wissbert fragt und eine Antwort in den Worten des Inhabers bekommt, mit Quelle (Gespräch und Datum) und Dossier-Hinweis
+- Wissbert hat ein eigenes Zeichen: die Stimmbalken des Logos in einer Sprechblase
+- Frage und Antwort sind pro Branchenseite angepasst (Öl für den Huber-Transporter, Heizung im Gemeindeamt, Kante beim Architekten, Fisch am Freitag, Rabatt beim Hauptlieferanten)
+
 ### Erstgespräch-Sektion
 - Heißt jetzt „In 20 Minuten wissen Sie, ob es passt“ mit dem Hinweis „Kostenloses Erstgespräch“ statt „20 Minuten mit Andrea“
 - Über dem Kalender steht, mit wem man spricht: Foto, Name und ein Satz von Andrea

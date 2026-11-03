@@ -1,7 +1,7 @@
 import { useEffect, useId, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
 import { Link, useParams } from "react-router-dom";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { FileText, Menu, Phone, Search } from "lucide-react";
+import { FileText, Menu, Mic, Phone, Search, SendHorizontal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
@@ -17,6 +17,7 @@ import {
   steps,
   trustPoints,
   content,
+  type ChatDemo,
   type LandingContent,
 } from "@/content/landing";
 import { isBranche, readPersonalization, type Personalization } from "@/lib/personalize";
@@ -433,6 +434,85 @@ const VideoBand = ({ v, image, imageAlt }: { v: LandingContent; image?: string; 
   );
 };
 
+// Wissbert's mark: the voice bars of the logo inside a speech bubble, Tacita green.
+const WissbertMark = ({ className }: { className?: string }) => {
+  const gradientId = useId();
+  return (
+    <svg viewBox="0 0 40 40" className={className} aria-hidden>
+      <defs>
+        <linearGradient id={gradientId} x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#4fd1a5" />
+          <stop offset="1" stopColor="#0b9a72" />
+        </linearGradient>
+      </defs>
+      <path
+        d="M20 3c9.4 0 17 6.6 17 14.8S29.4 32.6 20 32.6c-1.6 0-3.1-.2-4.6-.5L8 36.5l1.7-6.6C5.5 27.2 3 22.8 3 17.8 3 9.6 10.6 3 20 3z"
+        fill={`url(#${gradientId})`}
+      />
+      {[
+        [11.5, 15.5, 5],
+        [15.5, 12.5, 11],
+        [19.5, 10, 16],
+        [23.5, 13, 10],
+        [27.5, 15.5, 5],
+      ].map(([x, y, h]) => (
+        <rect key={x} x={x} y={y} width="2.4" height={h} rx="1.2" fill="#fff" />
+      ))}
+    </svg>
+  );
+};
+
+// Phone mockup: the successor asks the company memory, Wissbert answers in the owner's words.
+const PhoneChat = ({ chat }: { chat: ChatDemo }) => (
+  <div className="mx-auto w-[272px] rounded-[40px] border-[6px] border-[#0c1a17] bg-[#0c1a17] shadow-[0_30px_50px_rgba(12,26,23,0.35)] sm:w-[300px]">
+    <div className="relative overflow-hidden rounded-[34px] bg-background">
+      <div className="absolute left-1/2 top-2 h-5 w-24 -translate-x-1/2 rounded-full bg-[#0c1a17]" />
+      <div className="flex items-center gap-2.5 border-b px-4 pb-3 pt-9">
+        <WissbertMark className="size-9" />
+        <div className="min-w-0">
+          <p className="flex items-center gap-1.5 text-[13px] font-semibold">
+            Wissbert
+            <span className="size-1.5 rounded-full bg-primary" />
+          </p>
+          <p className="truncate text-[11px] text-muted-foreground">Firmengedächtnis · {chat.business}</p>
+        </div>
+      </div>
+      <div className="flex items-center gap-2 px-4 pt-3">
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-accent px-2.5 py-1 text-[10.5px] font-semibold text-primary">
+          <FileText className="size-3" />
+          Übergabe-Dossier · {chat.topics}
+        </span>
+      </div>
+      <div className="flex flex-col gap-2.5 px-4 pb-3 pt-3 text-[12.5px] leading-[1.4]">
+        <p className="ml-8 self-end rounded-2xl rounded-br-md bg-primary px-3 py-2 text-white">{chat.q1}</p>
+        <div className="mr-6 flex items-end gap-1.5">
+          <WissbertMark className="size-5 shrink-0" />
+          <div>
+            <p className="rounded-2xl rounded-bl-md bg-secondary px-3 py-2 text-body">{chat.a1}</p>
+            <p className="pl-1 pt-1 text-[10px] text-subtle">Quelle: {chat.source1}</p>
+          </div>
+        </div>
+        <p className="ml-8 self-end rounded-2xl rounded-br-md bg-primary px-3 py-2 text-white">{chat.q2}</p>
+        <div className="mr-6 flex items-end gap-1.5">
+          <WissbertMark className="size-5 shrink-0" />
+          <p className="flex items-center gap-1 rounded-2xl rounded-bl-md bg-secondary px-3 py-2.5">
+            {[0, 1, 2].map((i) => (
+              <span key={i} className="size-1.5 animate-pulse rounded-full bg-subtle" style={{ animationDelay: `${i * 200}ms` }} />
+            ))}
+          </p>
+        </div>
+      </div>
+      <div className="flex items-center gap-2 border-t px-3 py-2.5">
+        <span className="flex-1 rounded-full border bg-card px-3 py-1.5 text-[12px] text-subtle">Frage stellen …</span>
+        <Mic className="size-4 text-muted-foreground" />
+        <span className="flex size-7 items-center justify-center rounded-full bg-primary text-white">
+          <SendHorizontal className="size-3.5" />
+        </span>
+      </div>
+    </div>
+  </div>
+);
+
 // Small scenes for the three steps: a booked call, a running interview, the finished dossier.
 const MiniCard = ({ className, children }: { className?: string; children: ReactNode }) => (
   <div className={cn("w-full max-w-[260px] rounded-xl border bg-card p-4 shadow-[0_8px_16px_rgba(12,26,23,0.06)]", className)}>
@@ -617,6 +697,7 @@ const Landing = () => {
       dossier: b ? { ...content.dossier, points: b.dossierPoints } : content.dossier,
       memory: b ? { ...content.memory, points: b.memoryPoints } : content.memory,
       closing: b ? { ...content.closing, title: b.closingTitle } : content.closing,
+      chat: b ? b.chat : content.chat,
       heroCards: b
         ? {
             ...content.heroCards,
@@ -757,6 +838,32 @@ const Landing = () => {
                   </li>
                 ))}
               </ul>
+            </div>
+          </div>
+
+          {/* How the successor uses the memory: a phone with Wissbert answering in the owner's words. */}
+          <div className="mt-4 grid items-center gap-8 rounded-[20px] border bg-card p-[22px] sm:mt-5 sm:rounded-3xl sm:p-10 md:grid-cols-2 md:gap-12 lg:p-14">
+            <div className="order-2 md:order-1">
+              <p className="text-[11px] font-semibold text-primary sm:text-[13px]">So fragt Ihre Nachfolge</p>
+              <h3 className="pt-2.5 text-2xl font-bold tracking-[-0.6px] sm:pt-[18px] sm:text-[32px] sm:tracking-[-0.8px]">
+                Fragen statt anrufen
+              </h3>
+              <p className="pt-3 text-[15px] leading-[1.55] text-muted-foreground sm:pt-4 sm:text-[17px]">
+                Ihre Nachfolge tippt oder spricht die Frage ins Handy. Wissbert antwortet in Ihren Worten aus den
+                Gesprächen und zeigt, aus welchem Telefonat die Antwort stammt. Kein Suchen in Ordnern, kein Anruf bei
+                Ihnen.
+              </p>
+              <ul className="flex flex-col gap-2.5 pt-5 sm:pt-6">
+                {["Antworten in den Worten des Inhabers", "Jede Antwort mit Quelle und Datum", "Am Handy, in der Werkstatt, am Telefon"].map((t) => (
+                  <li key={t} className="flex gap-2.5 text-sm text-body sm:text-[15px]">
+                    <Check />
+                    {t}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="order-1 md:order-2">
+              <PhoneChat chat={v.chat} />
             </div>
           </div>
         </Section>

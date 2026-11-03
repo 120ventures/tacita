@@ -8,6 +8,17 @@ interface Stat {
   source: string;
 }
 
+// What the phone mockup in the results section shows: one question to the company memory and the answer
+// in the owner's words, with the call it came from.
+export interface ChatDemo {
+  business: string;
+  topics: string;
+  q1: string;
+  a1: string;
+  source1: string;
+  q2: string;
+}
+
 export interface LandingContent {
   title: string;
   pillTag: string;
@@ -29,6 +40,7 @@ export interface LandingContent {
   video: { pill: string; title: string; text: string; cardLabel: string; cardText: string };
   dossier: { eyebrow: string; title: string; points: string[] };
   memory: { eyebrow: string; title: string; points: string[] };
+  chat: ChatDemo;
   founding: {
     pill: string;
     title: string;
@@ -77,6 +89,7 @@ export interface BranchePreset {
   dossierPoints: string[];
   memoryPoints: string[];
   closingTitle: string;
+  chat: ChatDemo;
 }
 
 export const branchen: Record<string, BranchePreset> = {
@@ -110,6 +123,14 @@ export const branchen: Record<string, BranchePreset> = {
       "Wissens-Hotline für die ersten Monate",
     ],
     closingTitle: "Ihre Werkstatt ist mehr wert als die Hebebühnen.",
+    chat: {
+      business: "Kfz Huber",
+      topics: "52 Themen · 10 Gespräche",
+      q1: "Welches Öl nimmt der Transporter vom Huber?",
+      a1: "Der Huber-Transporter kriegt immer das 5W-30 vom Fass, nicht das aus dem Regal. Und beim Service den Innenraumfilter gleich mit, das will er so.",
+      source1: "Inhaber · Gespräch 4 · 12. März",
+      q2: "Und wer macht bei uns die Pickerl-Nachkontrolle?",
+    },
   },
   installateur: {
     label: "Installationsbetrieb",
@@ -141,6 +162,14 @@ export const branchen: Record<string, BranchePreset> = {
       "Wissens-Hotline für die ersten Monate",
     ],
     closingTitle: "Ihr Anlagenwissen ist Teil des Kaufpreises.",
+    chat: {
+      business: "Installationen Berger",
+      topics: "47 Themen · 9 Gespräche",
+      q1: "Was ist mit der Heizung im Gemeindeamt?",
+      a1: "Die Heizung im Gemeindeamt: Den Mischer nie auf Automatik stellen, sonst steht sie im Winter. Der Amtsleiter, der Herr Pichler, ruft direkt am Handy an.",
+      source1: "Inhaber · Gespräch 6 · 3. April",
+      q2: "Welche Hausverwaltung zahlt immer sofort?",
+    },
   },
   tischler: {
     label: "Tischlerei",
@@ -172,6 +201,14 @@ export const branchen: Record<string, BranchePreset> = {
       "Wissens-Hotline für die ersten Monate",
     ],
     closingTitle: "Ihre Tischlerei ist mehr wert als die Maschinen.",
+    chat: {
+      business: "Tischlerei Mayr",
+      topics: "44 Themen · 9 Gespräche",
+      q1: "Welche Kante nehmen wir beim Architekten Mayer?",
+      a1: "Beim Mayer immer die 2-mm-ABS-Kante in Anthrazit, nie die dünne. Und 15 % auf die Kalkulation drauf, weil er dreimal umplant.",
+      source1: "Inhaber · Gespräch 5 · 21. März",
+      q2: "Wo bestellen wir das Furnier?",
+    },
   },
   gastro: {
     label: "Gasthaus",
@@ -203,6 +240,14 @@ export const branchen: Record<string, BranchePreset> = {
       "Wissens-Hotline für die ersten Monate",
     ],
     closingTitle: "Ihr Gasthaus ist mehr wert als die Einrichtung.",
+    chat: {
+      business: "Gasthaus Huber",
+      topics: "58 Themen · 11 Gespräche",
+      q1: "Wer liefert den Fisch am Freitag?",
+      a1: "Der Fisch kommt vom Gruber in Gaming, Bestellung bis Mittwoch 12 Uhr, am Handy, nicht per Mail. Und im Sommer die Saiblinge, nicht die Forellen.",
+      source1: "Wirtin · Gespräch 3 · 8. März",
+      q2: "Welcher Tisch gehört dem Stammtisch am Donnerstag?",
+    },
   },
   handel: {
     label: "Fachhandel",
@@ -234,6 +279,14 @@ export const branchen: Record<string, BranchePreset> = {
       "Wissens-Hotline für die ersten Monate",
     ],
     closingTitle: "Ihr Geschäft ist mehr wert als die Ware im Regal.",
+    chat: {
+      business: "Fachhandel Huber",
+      topics: "49 Themen · 10 Gespräche",
+      q1: "Welchen Rabatt haben wir beim Hauptlieferanten?",
+      a1: "Beim Hauptlieferanten gilt noch der Rabatt von 2009, 18 % plus 3 % Skonto. Das steht in keinem Vertrag, der Herr Lang im Außendienst weiß es.",
+      source1: "Inhaber · Gespräch 4 · 14. März",
+      q2: "Wann bestellen wir die Saisonware?",
+    },
   },
 };
 
@@ -412,6 +465,14 @@ export const content: LandingContent = {
       a: "Für Betriebsübergaben gibt es in mehreren Bundesländern Beratungsförderungen. Wir prüfen im Erstgespräch, ob Ihr Fall infrage kommt, und helfen beim Antrag.",
     },
   ],
+  chat: {
+    business: "Betrieb Huber",
+    topics: "52 Themen · 10 Gespräche",
+    q1: "Wen rufe ich an, wenn der Großkunde Huber reklamiert?",
+    a1: "Beim Huber nie im Büro anrufen, direkt beim Polier am Handy. Und vor Ostern nie liefern, da ist die Baustelle zu.",
+    source1: "Inhaber · Gespräch 4 · 12. März",
+    q2: "Welche Lieferanten haben Konditionen, die nirgends stehen?",
+  },
   booking: {
     pill: "Kostenloses Erstgespräch",
     title: "In 20 Minuten wissen Sie, ob es passt",
