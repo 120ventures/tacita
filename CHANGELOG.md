@@ -6,6 +6,9 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Wissbert wieder ruhig
+- Die Wissbert-Figur im Ergebnis-Teil steht wieder still, ohne Schaukeln und ohne Pose-Wechsel beim Darüberfahren
+
 ### Buttons „Kostenloses Erstgespräch“
 - Alle Buchungs-Buttons heißen jetzt „Kostenloses Erstgespräch“ und führen zum Kalender: im Menü, unter dem Hero, nach den drei Schritten, nach „Für wen“ und als Sticky-Button am Handy
 

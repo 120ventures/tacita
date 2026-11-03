@@ -137,16 +137,6 @@
   0%, 100% { transform: scale(0.6); opacity: 0.35; }
   50% { transform: scale(1.3); opacity: 1; }
 }
-/* Wissbert idle: a slow breathe-and-sway so the figure feels alive without being busy */
-.tacita-bob {
-  transform-origin: 50% 100%;
-  animation: tacita-bob 3.6s ease-in-out infinite;
-}
-@keyframes tacita-bob {
-  0%, 100% { transform: translateY(0) rotate(0deg); }
-  30% { transform: translateY(-5px) rotate(-1.5deg); }
-  70% { transform: translateY(-2px) rotate(1.2deg); }
-}
 @keyframes tacita-drift {
   0% { transform: translateX(0); opacity: 0; }
   12% { opacity: 1; }
@@ -158,5 +148,4 @@
   .tacita-wave-bar { animation: none; }
   .tacita-pulse { animation: none; opacity: 0.8; }
   .tacita-drift { animation: none; opacity: 0.7; }
-  .tacita-bob { animation: none; }
 }
