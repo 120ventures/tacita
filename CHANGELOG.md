@@ -6,6 +6,9 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Neuer Calendly-Termin
+- Der eingebettete Kalender zeigt jetzt das Tacita-Erstgespräch statt des alten Nutriful-Termins
+
 ### Karten reagieren auf die Maus
 - Die Interview-Karten im Hero und die Karten in den Abschnitten heben sich beim Darüberfahren leicht an, bekommen einen grünen Rand und einen weichen Schatten
 

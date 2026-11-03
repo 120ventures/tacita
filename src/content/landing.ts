@@ -64,7 +64,7 @@ export interface LandingContent {
 }
 
 // Andrea's Erstgespräch calendar. Override with VITE_CALENDLY_URL in .env.local.
-export const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL || "https://calendly.com/andrea-buttinger-120/new-meeting-2";
+export const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL || "https://calendly.com/andrea-buttinger-120/new-meeting-3";
 // Stripe payment link for the deposit. Without it the deposit buttons lead to the booking section.
 export const DEPOSIT_URL = import.meta.env.VITE_DEPOSIT_URL || "";
 export const SAMPLE_DOSSIER_URL = import.meta.env.VITE_SAMPLE_DOSSIER_URL || "#ergebnis";
