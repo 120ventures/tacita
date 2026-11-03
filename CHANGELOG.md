@@ -6,6 +6,12 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Datenschutz-Karten
+- „Betriebsrat-tauglich“ ist weg, es bleiben EU-Hosting, AI Act und Mehrsprachig in drei Spalten
+
+### Wissbert bewegt sich
+- In der Karte „Fragen statt anrufen“ wippt Wissbert sanft und zeigt beim Darüberfahren den Daumen hoch; bei reduzierter Bewegung steht er still
+
 ### Erstgespräch-Sektion ohne Checkliste
 - Die sechs Häkchen-Punkte zwischen Andreas Box und dem Kalender sind weg; in der Box steht jetzt „Das Gespräch führen Sie mit mir. Wir finden gemeinsam heraus, ob Tacita für Sie passt.“
 

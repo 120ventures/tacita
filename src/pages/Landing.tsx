@@ -819,8 +819,21 @@ const Landing = () => {
                   </li>
                 ))}
               </ul>
-              <figure className="mt-6 flex items-center gap-5 sm:mt-8 sm:gap-6">
-                <img src="/wissbert.jpg" alt="Wissbert, der Interviewer von Tacita" className="h-44 w-auto sm:h-60" />
+              <figure className="group mt-6 flex items-center gap-5 sm:mt-8 sm:gap-6">
+                {/* Wissbert bobs gently; on hover he switches to the thumbs-up pose. */}
+                <div className="tacita-bob relative h-44 w-[132px] shrink-0 sm:h-60 sm:w-[180px]">
+                  <img
+                    src="/wissbert.jpg"
+                    alt="Wissbert, der Interviewer von Tacita"
+                    className="absolute inset-0 h-full w-auto transition-opacity duration-300 group-hover:opacity-0"
+                  />
+                  <img
+                    src="/wissbert-daumen.jpg"
+                    alt=""
+                    aria-hidden
+                    className="absolute inset-0 h-full w-auto opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  />
+                </div>
                 <figcaption className="text-[12px] leading-[1.45] text-subtle sm:text-[13px]">
                   Das ist <span className="font-semibold text-muted-foreground">Wissbert</span>, der Interviewer von
                   Tacita. Die Figur ist KI-generiert (Google Gemini).
@@ -886,7 +899,7 @@ const Landing = () => {
 
         <Section muted>
           <SectionHeader pill="Datenschutz & Vertrauen" title="Ihr Wissen bleibt Ihres" />
-          <div className="mt-6 grid gap-3 sm:mt-14 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
+          <div className="mt-6 grid gap-3 sm:mt-14 sm:grid-cols-3 sm:gap-5">
             {trustPoints.map((t) => (
               <Card key={t.title}>
                 <span className="flex size-11 items-center justify-center rounded-xl bg-accent text-lg font-bold text-primary">

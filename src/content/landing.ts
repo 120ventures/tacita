@@ -400,11 +400,6 @@ export const trustPoints = [
     text: "Klar gekennzeichnet, keine Emotionserkennung, keine Bewertung von Personen.",
   },
   {
-    icon: "✓",
-    title: "Betriebsrat-tauglich",
-    text: "Vorlage für die Betriebsvereinbarung inklusive. Teilnahme immer freiwillig.",
-  },
-  {
     icon: "Aa",
     title: "Mehrsprachig",
     text: "Interviews auch auf Türkisch, BKS oder Polnisch. Dokumentiert wird auf Deutsch.",
