@@ -6,6 +6,9 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Erstgespräch-Sektion ohne Checkliste
+- Die sechs Häkchen-Punkte zwischen Andreas Box und dem Kalender sind weg; in der Box steht jetzt „Das Gespräch führen Sie mit mir. Wir finden gemeinsam heraus, ob Tacita für Sie passt.“
+
 ### „Für wen“ neu gestaltet
 - Jede der drei Karten zeigt oben eine kleine Szene: Sie, das Dossier, und wer übernimmt (Käufer und Bank, Tochter oder Sohn, Meister oder Büroleitung), mit Icons auf grünem Verlauf
 - „Im Dossier“ steht als Chips statt als Fließtext

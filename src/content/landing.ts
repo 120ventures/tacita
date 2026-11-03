@@ -535,7 +535,7 @@ export const content: LandingContent = {
     host: {
       name: "Andrea Buttinger",
       role: "Tacita, Wien",
-      line: "Das Gespräch führen Sie mit mir. Ich höre zu, stelle Fragen und sage Ihnen ehrlich, ob Tacita für Sie passt.",
+      line: "Das Gespräch führen Sie mit mir. Wir finden gemeinsam heraus, ob Tacita für Sie passt.",
       image: "/andrea.jpg",
     },
   },

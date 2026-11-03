@@ -11,7 +11,6 @@ import {
   CALENDLY_URL,
   branchen,
   handoverCases,
-  foundingIncludes,
   navLinks,
   steps,
   trustPoints,
@@ -615,14 +614,6 @@ const Booking = ({ v, p, email }: { v: LandingContent; p: Personalization; email
           <p className="pt-0.5 text-sm leading-[1.5] text-muted-foreground">{v.booking.host.line}</p>
         </div>
       </div>
-      <ul className="mx-auto mt-4 grid max-w-[640px] gap-x-6 gap-y-2 px-1 text-left text-[13.5px] text-body sm:grid-cols-2 sm:text-[15px]">
-        {foundingIncludes.map((f) => (
-          <li key={f} className="flex gap-2.5">
-            <Check />
-            {f}
-          </li>
-        ))}
-      </ul>
       <div
         ref={ref}
         className="mx-auto mt-6 w-full max-w-[1000px] overflow-hidden rounded-[20px] border bg-card sm:mt-8 sm:rounded-3xl"
