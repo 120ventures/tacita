@@ -50,61 +50,183 @@ export const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL || "https://calend
 export const DEPOSIT_URL = import.meta.env.VITE_DEPOSIT_URL || "";
 export const SAMPLE_DOSSIER_URL = import.meta.env.VITE_SAMPLE_DOSSIER_URL || "#ergebnis";
 
-// Industry presets for personal links (?branche=kfz). They swap the hero cards so the example
-// sounds like the visitor's own business. Keys must match BRANCHEN in src/lib/personalize.ts.
-export const branchen: Record<
-  string,
-  { label: string; pill: string; question: string; mobileQuestion: string; quoteLabel: string; quote: string; mobileQuote: string; tags: string[] }
-> = {
+// Industry pages (/gastro, /kfz, …). Each preset swaps headline, subline, hero cards, the band image and the
+// result points so the page reads like it was written for that trade. Keys must match BRANCHEN in src/lib/personalize.ts.
+// Images: drop a 1600×900 JPG at public/branchen/<key>.jpg; until it exists the page shows the default video.
+export interface BranchePreset {
+  label: string;
+  pill: string;
+  headline: [string, string];
+  subline: string;
+  image: string;
+  imageAlt: string;
+  question: string;
+  mobileQuestion: string;
+  quoteLabel: string;
+  quote: string;
+  mobileQuote: string;
+  tags: string[];
+  video: { title: string; text: string; cardLabel: string };
+  dossierPoints: string[];
+  memoryPoints: string[];
+  closingTitle: string;
+}
+
+export const branchen: Record<string, BranchePreset> = {
   kfz: {
-    pill: "Für Kfz-Werkstätten",
     label: "Kfz-Werkstatt",
+    pill: "Für Kfz-Werkstätten",
+    headline: ["Werkstatt übergeben.", "Wissen behalten."],
+    subline:
+      "Stammkunden, Lieferanten, Pickerl-Routine, die Eigenheiten jeder Hebebühne: Tacita interviewt Sie am Telefon über alles, was nur Sie wissen, und macht daraus ein Übergabe-Dossier für Ihre Nachfolge.",
+    image: "/branchen/kfz.jpg",
+    imageAlt: "Mechaniker in einer Kfz-Werkstatt am Telefon",
     question: "Erzählen Sie mir vom letzten Mal, als Großkunde Huber unzufrieden war. Was haben Sie gemacht?",
     mobileQuestion: "Wann war Großkunde Huber zuletzt unzufrieden?",
     quoteLabel: "Inhaber, 63 · Kfz-Werkstatt",
     quote: "Da ruf ich nie im Büro an, sondern direkt beim Polier am Handy. Und vor Ostern nie liefern.",
     mobileQuote: "Nie im Büro anrufen, direkt beim Polier am Handy.",
     tags: ["Kunde Huber", "Ansprechpartner", "Lieferfenster"],
+    video: {
+      title: "Ein Anruf. 15 Minuten. Zwischen zwei Autos.",
+      text: "Kein Termin im Büro, keine App, kein Formular. Wir rufen an, wann es in der Werkstatt passt, und fragen nach echten Fällen: Kunden, Teilelieferanten, Prüfstelle.",
+      cardLabel: "Gespräch 3 von 10 · Teilelieferanten",
+    },
+    dossierPoints: [
+      "Stammkunden und Flottenkunden, und was jeder von ihnen erwartet",
+      "Teilelieferanten, Konditionen und wer bei Engpässen schnell liefert",
+      "Pickerl, Prüfstelle, Behörden: Fristen und Ansprechpartner",
+    ],
+    memoryPoints: [
+      "Durchsuchbar: „Welches Öl nimmt der Huber-Transporter?“",
+      "Eigenheiten der Hebebühnen, Geräte und Spezialwerkzeuge",
+      "Wissens-Hotline für die ersten Monate",
+    ],
+    closingTitle: "Ihre Werkstatt ist mehr wert als die Hebebühnen.",
   },
   installateur: {
-    pill: "Für Installationsbetriebe",
     label: "Installationsbetrieb",
+    pill: "Für Installationsbetriebe",
+    headline: ["Betrieb übergeben.", "Anlagenwissen behalten."],
+    subline:
+      "Welche Heizung im Gemeindeamt zickt, welche Hausverwaltung sofort zahlt, wo der Absperrhahn im Altbau sitzt: Tacita interviewt Sie am Telefon und macht daraus ein Übergabe-Dossier für Ihre Nachfolge.",
+    image: "/branchen/installateur.jpg",
+    imageAlt: "Installateur im Heizungskeller am Telefon",
     question: "Welche Anlage im Bestand macht am meisten Ärger, und was wissen nur Sie darüber?",
     mobileQuestion: "Welche Anlage macht am meisten Ärger?",
     quoteLabel: "Inhaber, 61 · Installateur",
     quote: "Die Heizung im Gemeindeamt: Den Mischer nie auf Automatik, sonst steht sie im Winter. Steht nirgends.",
     mobileQuote: "Den Mischer im Gemeindeamt nie auf Automatik.",
     tags: ["Anlage Gemeindeamt", "Wartungsfalle", "Ersatzteile"],
+    video: {
+      title: "Ein Anruf. 15 Minuten. Auch auf der Baustelle.",
+      text: "Kein Termin im Büro, keine App, kein Formular. Wir rufen an, wann es Ihnen passt, und fragen nach echten Anlagen: welche Heizung, welcher Kunde, welche Eigenheit.",
+      cardLabel: "Gespräch 3 von 10 · Wartungskunden",
+    },
+    dossierPoints: [
+      "Wartungskunden und Hausverwaltungen, und wer wie betreut wird",
+      "Anlagen im Bestand mit ihren Eigenheiten und Ersatzteilen",
+      "Großhändler, Konditionen und Notfall-Lieferanten",
+    ],
+    memoryPoints: [
+      "Durchsuchbar: „Was ist mit der Therme in der Hauptstraße 12?“",
+      "Fallen bei alten Anlagen, die nirgends dokumentiert sind",
+      "Wissens-Hotline für die ersten Monate",
+    ],
+    closingTitle: "Ihr Anlagenwissen ist Teil des Kaufpreises.",
   },
   tischler: {
-    pill: "Für Tischlereien",
     label: "Tischlerei",
+    pill: "Für Tischlereien",
+    headline: ["Tischlerei übergeben.", "Wissen behalten."],
+    subline:
+      "Wie Sie eine Küche kalkulieren, welcher Furnierlieferant nicht wirft, welcher Architekt immer Sonderwünsche hat: Tacita interviewt Sie am Telefon und macht daraus ein Übergabe-Dossier für Ihre Nachfolge.",
+    image: "/branchen/tischler.jpg",
+    imageAlt: "Tischlermeister in der Werkstatt am Telefon",
     question: "Wie kalkulieren Sie eine Einbauküche, bei der der Kunde noch nicht weiß, was er will?",
     mobileQuestion: "Wie kalkulieren Sie eine unklare Küche?",
     quoteLabel: "Inhaber, 64 · Tischlerei",
     quote: "Beim Furnier nur vom Lieferanten in Linz, der Rest wirft. Und beim Architekten Mayer immer 15 % drauf.",
     mobileQuote: "Furnier nur aus Linz, beim Architekten 15 % drauf.",
     tags: ["Lieferant Furnier", "Kalkulation", "Architekt Mayer"],
+    video: {
+      title: "Ein Anruf. 15 Minuten. Zwischen Zuschnitt und Montage.",
+      text: "Kein Termin im Büro, keine App, kein Formular. Wir rufen an, wann es in der Werkstatt passt, und fragen nach echten Aufträgen: Kalkulation, Lieferanten, Maschinen.",
+      cardLabel: "Gespräch 3 von 10 · Kalkulation",
+    },
+    dossierPoints: [
+      "Kalkulation: wie Sie Aufträge bepreisen und wo die Fallen liegen",
+      "Lieferanten für Platten, Furnier und Beschläge, mit Konditionen",
+      "Architekten, Planer und Stammkunden, und was jeder erwartet",
+    ],
+    memoryPoints: [
+      "Durchsuchbar: „Welche Kante nehmen wir beim Mayer?“",
+      "Eigenheiten von CNC, Kantenleimer und Lackieranlage",
+      "Wissens-Hotline für die ersten Monate",
+    ],
+    closingTitle: "Ihre Tischlerei ist mehr wert als die Maschinen.",
   },
   gastro: {
-    pill: "Für Gasthäuser und Hotels",
     label: "Gasthaus",
+    pill: "Für Gasthäuser und Hotels",
+    headline: ["Gasthaus übergeben.", "Wissen behalten."],
+    subline:
+      "Rezepturen, Lieferanten, Stammtische, Saisonplanung: Was nur Sie und Ihre Küche wissen, interviewt Tacita am Telefon und macht daraus ein Übergabe-Dossier für Ihre Nachfolge oder Ihren Käufer.",
+    image: "/branchen/gastro.jpg",
+    imageAlt: "Wirtin in der Gaststube am Telefon",
     question: "Was passiert in der Küche, wenn Sie eine Woche nicht da sind? Wo hakt es zuerst?",
     mobileQuestion: "Was hakt zuerst, wenn Sie nicht da sind?",
     quoteLabel: "Wirtin, 62 · Gasthaus",
     quote: "Das Fleisch kommt vom Bauern in Gaming, nicht vom Großhandel. Und die Stammtischrunde am Donnerstag kriegt den Tisch beim Fenster.",
     mobileQuote: "Fleisch vom Bauern in Gaming, Stammtisch am Fenster.",
     tags: ["Lieferant Fleisch", "Stammgäste", "Saisonplanung"],
+    video: {
+      title: "Ein Anruf. 15 Minuten. Vor dem Mittagsgeschäft.",
+      text: "Kein Termin im Büro, keine App, kein Formular. Wir rufen an, wann es im Betrieb passt, und fragen nach echten Fällen: Lieferanten, Stammgäste, Feste, Saison.",
+      cardLabel: "Gespräch 3 von 10 · Lieferanten",
+    },
+    dossierPoints: [
+      "Lieferanten für Fleisch, Gemüse, Wein und Getränke, mit Konditionen",
+      "Stammgäste, Stammtische und Feste, und wer was erwartet",
+      "Saisonplanung, Personal, Behörden und Brauereivertrag",
+    ],
+    memoryPoints: [
+      "Durchsuchbar: „Wer liefert den Fisch am Freitag?“",
+      "Rezepturen und Abläufe der Küche in den Worten der Wirtsleute",
+      "Wissens-Hotline für die ersten Monate",
+    ],
+    closingTitle: "Ihr Gasthaus ist mehr wert als die Einrichtung.",
   },
   handel: {
-    pill: "Für den Fachhandel",
     label: "Fachhandel",
+    pill: "Für den Fachhandel",
+    headline: ["Geschäft übergeben.", "Wissen behalten."],
+    subline:
+      "Lieferantenkonditionen, Sortiment, Schlüsselkunden, Saison: Tacita interviewt Sie am Telefon über alles, was nur Sie wissen, und macht daraus ein Übergabe-Dossier für Ihre Nachfolge oder Ihren Käufer.",
+    image: "/branchen/handel.jpg",
+    imageAlt: "Inhaber eines Fachgeschäfts im Laden am Telefon",
     question: "Welche Konditionen haben Sie mit Ihren drei wichtigsten Lieferanten ausgehandelt, und warum?",
     mobileQuestion: "Welche Konditionen haben Ihre Top-3-Lieferanten?",
     quoteLabel: "Inhaber, 60 · Fachhandel",
     quote: "Beim Hauptlieferanten gilt noch der Rabatt von 2009, aber nur, solange ich bestelle. Das weiß dort auch keiner mehr.",
     mobileQuote: "Der Rabatt von 2009 gilt nur, solange ich bestelle.",
     tags: ["Lieferantenkonditionen", "Sortiment", "Schlüsselkunden"],
+    video: {
+      title: "Ein Anruf. 15 Minuten. Nach Ladenschluss.",
+      text: "Kein Termin im Büro, keine App, kein Formular. Wir rufen an, wann es im Geschäft passt, und fragen nach echten Fällen: Lieferanten, Sortiment, Schlüsselkunden.",
+      cardLabel: "Gespräch 3 von 10 · Lieferanten",
+    },
+    dossierPoints: [
+      "Lieferanten, Konditionen und mündliche Absprachen, die nirgends stehen",
+      "Sortiment: was läuft, was nicht, und warum",
+      "Schlüsselkunden, Saison und Aktionen, die den Umsatz tragen",
+    ],
+    memoryPoints: [
+      "Durchsuchbar: „Welchen Rabatt haben wir beim Hauptlieferanten?“",
+      "Bestellrhythmus und Eigenheiten der Lieferanten",
+      "Wissens-Hotline für die ersten Monate",
+    ],
+    closingTitle: "Ihr Geschäft ist mehr wert als die Ware im Regal.",
   },
 };
 

@@ -6,6 +6,11 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Branchenseiten mit eigenem Inhalt
+- /gastro, /kfz, /installateur, /tischler und /handel haben jetzt eigene Headline und Subline (z. B. „Gasthaus übergeben. Wissen behalten.“), eigene Texte im Video-Band, branchenspezifische Punkte bei Übergabe-Dossier und Firmengedächtnis und einen eigenen Schlusssatz
+- Jede Branchenseite hat einen Bildplatz im Band (`public/branchen/<branche>.jpg`); solange kein Bild da ist, läuft das Video weiter
+- Die Branchenleiste unter dem Hero erscheint nur auf der Startseite; tacita.at selbst ist unverändert
+
 ### Kein Preis auf der Seite
 - Die Preis-Sektion heißt jetzt „Jetzt starten“ und zeigt das kostenlose Erstgespräch statt eines Preises; die Anzahlung ist verschwunden, es gibt nur noch den Button „Erstgespräch buchen“
 - FAQ „Was kostet es?“ verweist aufs Erstgespräch

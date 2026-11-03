@@ -371,8 +371,11 @@ const Hero = ({ v, onBooked }: { v: LandingContent; onBooked: (email: string) =>
   );
 };
 
-const VideoBand = ({ v }: { v: LandingContent }) => {
+const VideoBand = ({ v, image, imageAlt }: { v: LandingContent; image?: string; imageAlt?: string }) => {
   const ref = useRef<HTMLVideoElement>(null);
+  // Industry pages show a photo; until the file exists the default video stays.
+  const [imageFailed, setImageFailed] = useState(false);
+  const showImage = Boolean(image) && !imageFailed;
 
   // Respect reduced motion: show the poster frame instead of a looping video.
   useEffect(() => {
@@ -382,18 +385,27 @@ const VideoBand = ({ v }: { v: LandingContent }) => {
   return (
     <section className="px-5 pt-9 sm:px-10 sm:pt-20 lg:px-16 lg:pt-[104px]">
       <div className="relative mx-auto aspect-[4/5] max-w-[1312px] overflow-hidden rounded-[20px] bg-foreground sm:aspect-[16/9] sm:rounded-3xl lg:aspect-[21/9]">
-        <video
-          ref={ref}
-          className="absolute inset-0 size-full object-cover object-[62%_center]"
-          src={siteCallVideo}
-          poster={siteCallPoster}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          aria-hidden
-        />
+        {showImage ? (
+          <img
+            src={image}
+            alt={imageAlt ?? ""}
+            className="absolute inset-0 size-full object-cover object-[62%_center]"
+            onError={() => setImageFailed(true)}
+          />
+        ) : (
+          <video
+            ref={ref}
+            className="absolute inset-0 size-full object-cover object-[62%_center]"
+            src={siteCallVideo}
+            poster={siteCallPoster}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            aria-hidden
+          />
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/85 via-foreground/30 to-transparent sm:bg-gradient-to-r sm:from-foreground/85 sm:via-foreground/40" />
 
         <div className="absolute inset-x-0 bottom-0 p-6 text-white sm:inset-y-0 sm:flex sm:max-w-[560px] sm:flex-col sm:justify-end sm:p-12 lg:justify-center lg:p-16">
@@ -575,13 +587,21 @@ const Landing = () => {
   // Personal links (?name=Huber&branche=kfz&von=Andrea) swap the hero example and greet the visitor.
   const { branche: pathBranche } = useParams();
   const p = useMemo(() => readPersonalization(window.location.search, pathBranche), [pathBranche]);
+  const b = p.branche ? branchen[p.branche] : undefined;
   const v = useMemo<LandingContent>(() => {
-    const b = p.branche ? branchen[p.branche] : undefined;
     return {
       ...content,
+      title: b ? `Tacita – ${b.headline[0]} ${b.headline[1]}` : content.title,
       pillTag: p.name ? "Persönlich" : b ? b.label : content.pillTag,
       pill: p.name ? `Für ${p.name} · Übergabe-Interviews per Telefon` : b ? `${b.pill} · Übergabe-Interviews per Telefon` : content.pill,
       pillShort: p.name ? `Für ${p.name}` : b ? b.pill : content.pillShort,
+      headline: b ? b.headline : content.headline,
+      subline: b ? b.subline : content.subline,
+      trades: b ? undefined : content.trades,
+      video: b ? { ...content.video, ...b.video } : content.video,
+      dossier: b ? { ...content.dossier, points: b.dossierPoints } : content.dossier,
+      memory: b ? { ...content.memory, points: b.memoryPoints } : content.memory,
+      closing: b ? { ...content.closing, title: b.closingTitle } : content.closing,
       heroCards: b
         ? {
             ...content.heroCards,
@@ -591,7 +611,7 @@ const Landing = () => {
           }
         : content.heroCards,
     };
-  }, [p]);
+  }, [p, b]);
   const [pastHero, setPastHero] = useState(false);
   const [email, setEmail] = useState("");
 
@@ -643,7 +663,7 @@ const Landing = () => {
           </div>
         </Section>
 
-        <VideoBand v={v} />
+        <VideoBand v={v} image={b?.image} imageAlt={b?.imageAlt} />
 
         <Section id="ablauf">
           <SectionHeader pill="So funktioniert’s" title="In drei Schritten zur sicheren Übergabe" />
