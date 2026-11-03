@@ -6,6 +6,9 @@ Overview of user-facing changes.
 
 ## 2026-11-03
 
+### Hero ohne Checkliste
+- Die drei Häkchen-Punkte unter der Tonspur („Nur telefonieren, keine App“ usw.) sind auf allen Seiten weg
+
 ### Neue Branchenseite /friseur
 - „Salon übergeben. Wissen behalten.“ mit eigenem Foto, Interview-Beispiel (Farbrezeptur der Stammkundin), Dossier- und Firmengedächtnis-Punkten und Chat-Beispiel; Bildnachweis im Impressum
 

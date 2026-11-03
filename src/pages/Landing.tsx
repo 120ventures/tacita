@@ -300,14 +300,6 @@ const Hero = ({ v }: { v: LandingContent }) => {
           </FloatingCard>
         </div>
 
-        <ul className="mt-6 hidden flex-wrap justify-center gap-x-7 gap-y-2 text-sm text-muted-foreground md:flex">
-          {v.heroProof.map((p) => (
-            <li key={p} className="flex items-center gap-1.5">
-              <Check className="text-[13px]" />
-              {p}
-            </li>
-          ))}
-        </ul>
       </div>
 
       {v.trades && (
