@@ -69,7 +69,7 @@ export const CALENDLY_URL = import.meta.env.VITE_CALENDLY_URL || "https://calend
 export const DEPOSIT_URL = import.meta.env.VITE_DEPOSIT_URL || "";
 export const SAMPLE_DOSSIER_URL = import.meta.env.VITE_SAMPLE_DOSSIER_URL || "#ergebnis";
 
-// Industry pages (/gastro, /kfz, …). Each preset swaps headline, subline, hero cards, the band image and the
+// Industry pages (/1 … /6, named aliases /gastro, /kfz, … still work). Each preset swaps headline, subline, hero cards, the band image and the
 // result points so the page reads like it was written for that trade. Keys must match BRANCHEN in src/lib/personalize.ts.
 // Images: drop a 1600×900 JPG at public/branchen/<key>.jpg; until it exists the page shows the default video.
 export interface BranchePreset {

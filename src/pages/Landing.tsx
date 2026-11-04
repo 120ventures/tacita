@@ -18,7 +18,7 @@ import {
   type ChatDemo,
   type LandingContent,
 } from "@/content/landing";
-import { isBranche, readPersonalization, type Personalization } from "@/lib/personalize";
+import { readPersonalization, resolveBranche, type Personalization } from "@/lib/personalize";
 import NotFound from "./NotFound";
 
 // The calendar is embedded on the page, so every booking button jumps to it.
@@ -646,7 +646,7 @@ const Booking = ({ v, p, email }: { v: LandingContent; p: Personalization; email
 };
 
 const Landing = () => {
-  // Personal links (?name=Huber&branche=kfz&von=Andrea) swap the hero example and greet the visitor.
+  // Personal links (/2?name=Huber&von=Andrea) swap the hero example and greet the visitor.
   const { branche: pathBranche } = useParams();
   const p = useMemo(() => readPersonalization(window.location.search, pathBranche), [pathBranche]);
   const b = p.branche ? branchen[p.branche] : undefined;
@@ -699,7 +699,7 @@ const Landing = () => {
   }, []);
 
   // /irgendwas is not an industry page.
-  if (pathBranche && !isBranche(pathBranche)) return <NotFound />;
+  if (pathBranche && !resolveBranche(pathBranche)) return <NotFound />;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
