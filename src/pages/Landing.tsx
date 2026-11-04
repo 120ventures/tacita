@@ -1,7 +1,7 @@
 import { useEffect, useId, useMemo, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
-import { ArrowRight, Brain, FileText, HardHat, Landmark, Menu, Mic, Phone, Search, SendHorizontal, User, Users } from "lucide-react";
+import { ArrowRight, Baby, Brain, CalendarClock, FileText, HardHat, Landmark, Menu, Mic, Phone, Search, SendHorizontal, User, UserCheck, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetClose, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { cn } from "@/lib/utils";
@@ -12,6 +12,7 @@ import {
   branchen,
   handoverCases,
   navLinks,
+  sectionTitles,
   steps,
   trustPoints,
   content,
@@ -125,7 +126,7 @@ const Card = ({ className, children }: { className?: string; children: ReactNode
 );
 
 // Who takes over in each hand-over case (the "Für wen" cards).
-const HANDOVER_ICONS = { sale: Landmark, family: Users, team: HardHat } as const;
+const HANDOVER_ICONS = { sale: Landmark, family: Users, team: HardHat, retire: UserCheck, leave: Baby, quit: CalendarClock } as const;
 
 const FloatingCard = ({ className, children }: { className?: string; children: ReactNode }) => (
   <div
@@ -140,11 +141,14 @@ const FloatingCard = ({ className, children }: { className?: string; children: R
   </div>
 );
 
-const Header = ({ v }: { v: LandingContent }) => (
+const Header = ({ v }: { v: LandingContent }) => {
+  // The logo reloads the page you are on (an industry page stays an industry page), it never jumps to /.
+  const { pathname, search } = useLocation();
+  return (
   <header className="sticky top-0 z-20 border-b bg-background/95 backdrop-blur">
     <div className="mx-auto flex max-w-[1440px] items-center justify-between px-5 py-2.5 sm:px-10 sm:py-5 lg:px-16">
       <div className="flex items-center gap-12">
-        <Link to="/" aria-label="Tacita Startseite">
+        <Link to={pathname + search} aria-label="Tacita, zum Seitenanfang">
           <span className="sm:hidden">
             <Logo small />
           </span>
@@ -187,7 +191,8 @@ const Header = ({ v }: { v: LandingContent }) => (
       </div>
     </div>
   </header>
-);
+  );
+};
 
 // Bar heights for the voice waveform: loud in the middle, quieter at the edges, a little irregular like speech.
 const WAVE_BAR_COUNT = 29;
@@ -321,11 +326,23 @@ const Hero = ({ v }: { v: LandingContent }) => {
   );
 };
 
-const VideoBand = ({ v, image, imageAlt, imagePosition }: { v: LandingContent; image?: string; imageAlt?: string; imagePosition?: string }) => {
+const VideoBand = ({
+  v,
+  image,
+  imageAlt,
+  imagePosition,
+  video,
+}: {
+  v: LandingContent;
+  image?: string;
+  imageAlt?: string;
+  imagePosition?: string;
+  video?: { src: string; poster?: string; position?: string };
+}) => {
   const ref = useRef<HTMLVideoElement>(null);
-  // Industry pages show a photo; until the file exists the default video stays.
+  // Industry pages show a photo; until the file exists the default video stays. A page can bring its own clip.
   const [imageFailed, setImageFailed] = useState(false);
-  const showImage = Boolean(image) && !imageFailed;
+  const showImage = Boolean(image) && !imageFailed && !video;
 
   // Respect reduced motion: show the poster frame instead of a looping video.
   useEffect(() => {
@@ -346,9 +363,10 @@ const VideoBand = ({ v, image, imageAlt, imagePosition }: { v: LandingContent; i
         ) : (
           <video
             ref={ref}
-            className="absolute inset-0 size-full object-cover object-[62%_center]"
-            src={siteCallVideo}
-            poster={siteCallPoster}
+            className="absolute inset-0 size-full object-cover"
+            style={{ objectPosition: video?.position ?? "62% center" }}
+            src={video?.src ?? siteCallVideo}
+            poster={video?.poster ?? siteCallPoster}
             autoPlay
             muted
             loop
@@ -655,14 +673,22 @@ const Landing = () => {
       ...content,
       title: b ? `Tacita – ${b.headline[0]} ${b.headline[1]}` : content.title,
       pillTag: p.name ? "Persönlich" : b ? b.label : content.pillTag,
-      pill: p.name ? `Für ${p.name} · Übergabe-Interviews per Telefon` : b ? `${b.pill} · Übergabe-Interviews per Telefon` : content.pill,
+      pill: p.name
+        ? `Für ${p.name} · ${b?.pillSuffix ?? "Übergabe-Interviews per Telefon"}`
+        : b
+          ? `${b.pill} · ${b.pillSuffix ?? "Übergabe-Interviews per Telefon"}`
+          : content.pill,
       pillShort: p.name ? `Für ${p.name}` : b ? b.pill : content.pillShort,
       headline: b ? b.headline : content.headline,
       subline: b ? b.subline : content.subline,
       trades: b ? undefined : content.trades,
+      heroProof: b?.heroProof ?? content.heroProof,
+      problem: b?.problem ?? content.problem,
+      faq: b?.faq ?? content.faq,
+      founding: b?.founding ? { ...content.founding, ...b.founding } : content.founding,
       video: b ? { ...content.video, ...b.video } : content.video,
-      dossier: b ? { ...content.dossier, points: b.dossierPoints } : content.dossier,
-      memory: b ? { ...content.memory, points: b.memoryPoints } : content.memory,
+      dossier: b ? { ...content.dossier, eyebrow: b.dossierEyebrow ?? content.dossier.eyebrow, points: b.dossierPoints } : content.dossier,
+      memory: b ? { ...content.memory, eyebrow: b.memoryEyebrow ?? content.memory.eyebrow, points: b.memoryPoints } : content.memory,
       closing: b ? { ...content.closing, title: b.closingTitle } : content.closing,
       chat: b ? b.chat : content.chat,
       heroCards: b
@@ -675,6 +701,9 @@ const Landing = () => {
         : content.heroCards,
     };
   }, [p, b]);
+  const stepList = b?.steps ?? steps;
+  const caseList = b?.cases ?? handoverCases;
+  const titles = { ...sectionTitles, ...b?.titles };
   const [pastHero, setPastHero] = useState(false);
   const [inBooking, setInBooking] = useState(false);
 
@@ -708,7 +737,7 @@ const Landing = () => {
       <main>
         <Hero v={v} />
 
-        <VideoBand v={v} image={b?.image} imageAlt={b?.imageAlt} imagePosition={b?.imagePosition} />
+        <VideoBand v={v} image={b?.image} imageAlt={b?.imageAlt} imagePosition={b?.imagePosition} video={b?.bandVideo} />
 
         <Section muted>
           <SectionHeader pill="Das Problem" title={v.problem.title} subtitle={v.problem.subtitle} />
@@ -741,9 +770,9 @@ const Landing = () => {
         </Section>
 
         <Section id="ablauf">
-          <SectionHeader pill="So funktioniert’s" title="In drei Schritten zur sicheren Übergabe" />
+          <SectionHeader pill="So funktioniert’s" title={titles.steps} />
           <ol className="mt-8 grid gap-10 sm:mt-14 md:grid-cols-3 md:gap-0">
-            {steps.map((s, i) => {
+            {stepList.map((s, i) => {
               const Scene = STEP_SCENES[i];
               return (
                 <li key={s.title} className="flex flex-col">
@@ -755,7 +784,7 @@ const Landing = () => {
                     className={cn(
                       "relative mt-0 md:mt-7 md:before:absolute md:before:inset-x-0 md:before:top-1/2 md:before:h-px md:before:bg-border",
                       i === 0 && "md:before:left-[18px]",
-                      i === steps.length - 1 && "md:before:right-auto md:before:w-[18px]",
+                      i === stepList.length - 1 && "md:before:right-auto md:before:w-[18px]",
                     )}
                   >
                     <span className="relative z-10 flex size-9 items-center justify-center rounded-full border-2 border-primary bg-background text-[13px] font-bold text-primary">
@@ -776,7 +805,7 @@ const Landing = () => {
         </Section>
 
         <Section id="ergebnis" muted>
-          <SectionHeader pill="Das Ergebnis" title="Zwei Dinge, die bleiben, wenn Sie gehen" />
+          <SectionHeader pill="Das Ergebnis" title={titles.result} />
           <div className="mt-6 grid gap-4 sm:mt-14 sm:gap-5 md:grid-cols-2">
             <div className="tacita-dossier rounded-[20px] p-[22px] text-white sm:rounded-3xl sm:p-10 md:min-h-[400px]">
               <p className="text-[11px] font-semibold text-[#cff3e5] sm:text-[13px]">{v.dossier.eyebrow}</p>
@@ -847,9 +876,9 @@ const Landing = () => {
         </Section>
 
         <Section id="fuer-wen">
-          <SectionHeader pill="Für wen" title="Für jede Art der Übergabe" />
+          <SectionHeader pill="Für wen" title={titles.cases} />
           <div className="mt-6 grid gap-3 sm:mt-14 sm:gap-5 md:grid-cols-3">
-            {handoverCases.map((a) => {
+            {caseList.map((a) => {
               const To = HANDOVER_ICONS[a.key];
               return (
                 <Card key={a.title} className="flex flex-col overflow-hidden !p-0">
@@ -859,7 +888,7 @@ const Landing = () => {
                       <span className="flex size-12 items-center justify-center rounded-full border-2 border-primary bg-card text-primary">
                         <User className="size-5" />
                       </span>
-                      <span className="text-[11px] font-semibold text-muted-foreground">Sie</span>
+                      <span className="max-w-[88px] text-center text-[11px] font-semibold leading-tight text-muted-foreground">{a.from ?? "Sie"}</span>
                     </div>
                     <div className="flex flex-1 items-center justify-center gap-1.5 px-2 text-primary">
                       <span className="h-px flex-1 bg-primary/30" />

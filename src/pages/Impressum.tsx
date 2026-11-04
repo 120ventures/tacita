@@ -10,6 +10,7 @@ const credits = [
   { what: "Foto Tischlerei", who: "LSOphoto", id: "2247479509" },
   { what: "Foto Fachhandel", who: "andresr", id: "1586522918" },
   { what: "Foto Friseursalon", who: "koldo studio", id: "2239632171" },
+  { what: "Video „Ein Anruf. 15 Minuten.“ (Seite Wenn ein Mitarbeiter geht)", who: "AndreyPopov", id: "2227735019" },
 ];
 
 const Impressum = () => {

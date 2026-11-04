@@ -1,7 +1,7 @@
 // Industry pages and personal links for the private outreach: tacita.at/3?name=Huber&von=Andrea
 // Everything is optional. Without parameters the page is the public version.
 
-export const BRANCHEN = ["kfz", "installateur", "tischler", "gastro", "handel", "friseur"] as const;
+export const BRANCHEN = ["kfz", "installateur", "tischler", "gastro", "handel", "friseur", "team"] as const;
 export type Branche = (typeof BRANCHEN)[number];
 
 /**
@@ -15,6 +15,7 @@ export const BRANCHE_NUMMERN: Record<string, Branche> = {
   "4": "tischler",
   "5": "handel",
   "6": "friseur",
+  "7": "team",
 };
 
 export interface Personalization {

@@ -94,7 +94,54 @@ export interface BranchePreset {
   memoryPoints: string[];
   closingTitle: string;
   chat: ChatDemo;
+  /** Optional overrides for variants that are not a trade, e.g. the team/HR page (/7). */
+  pillSuffix?: string;
+  heroProof?: string[];
+  dossierEyebrow?: string;
+  memoryEyebrow?: string;
+  /** A page-specific clip for the band instead of the photo (file in public/, so it is a plain path). */
+  bandVideo?: { src: string; poster?: string; position?: string };
+  problem?: LandingContent["problem"];
+  steps?: Step[];
+  cases?: HandoverCase[];
+  faq?: LandingContent["faq"];
+  founding?: Partial<LandingContent["founding"]>;
+  titles?: Partial<SectionTitles>;
 }
+
+export interface Step {
+  title: string;
+  text: string;
+}
+
+export interface HandoverCase {
+  /** Picks the icon of who takes over. */
+  key: "sale" | "family" | "team" | "retire" | "leave" | "quit";
+  eyebrow: string;
+  title: string;
+  /** Label under the "you" figure on the left; defaults to "Sie". */
+  from?: string;
+  to: string;
+  text: string;
+  focus: string[];
+}
+
+export interface SectionTitles {
+  steps: string;
+  result: string;
+  cases: string;
+}
+
+export const sectionTitles: SectionTitles = {
+  steps: "In drei Schritten zur sicheren Übergabe",
+  result: "Zwei Dinge, die bleiben, wenn Sie gehen",
+  cases: "Für jede Art der Übergabe",
+};
+
+const whoInterviews = {
+  q: "Wer führt die Interviews?",
+  a: "Wissbert, unser KI-Interviewer. Er ruft Sie an, stellt die Fragen und hört zu, wie ein Kollege aus dem Fach, geduldig und ohne zu bewerten. Unser Team bereitet jedes Gespräch auf Ihren Betrieb vor, liest jede Antwort gegen und baut daraus Dossier und Firmengedächtnis.",
+};
 
 export const branchen: Record<string, BranchePreset> = {
   kfz: {
@@ -343,6 +390,153 @@ export const branchen: Record<string, BranchePreset> = {
       q2: "Wann bestellen wir die Saisonware?",
     },
   },
+  team: {
+    label: "Wenn ein Mitarbeiter geht",
+    pill: "Für Teams und HR",
+    pillSuffix: "Wissens-Interviews per Telefon",
+    headline: ["Ein Mitarbeiter geht.", "Das Wissen bleibt."],
+    subline:
+      "Pensionierung, Karenz, Kündigung: Tacita interviewt den Mitarbeiter am Telefon, bevor er geht, und macht aus dem, was nur er weiß, ein Übergabe-Dossier und ein durchsuchbares Archiv für das Team.",
+    image: "/branchen/team.jpg",
+    imagePosition: "50% 30%",
+    imageAlt: "Mitarbeiterin am Telefon im Büro",
+    // iStock 2227735019 (AndreyPopov): woman taking a call at her desk. Credit in the Impressum.
+    bandVideo: { src: "/branchen/team-call.mp4", poster: "/branchen/team-call-poster.jpg", position: "50% 35%" },
+    question: "Erzählen Sie mir vom letzten Mal, als Anlage 3 in der Nacht ausgefallen ist. Was haben Sie gemacht?",
+    mobileQuestion: "Was war beim letzten Ausfall von Anlage 3?",
+    quoteLabel: "Instandhalter, 62 · 31 Jahre im Betrieb",
+    quote: "Da schaut man zuerst auf den alten Druckschalter, nicht aufs Display. Der zeigt seit Jahren falsch an.",
+    mobileQuote: "Zuerst der alte Druckschalter, nicht das Display.",
+    tags: ["Anlage 3", "Störungsroutine", "Ansprechpartner"],
+    heroProof: ["Nur telefonieren, keine App", "Echte Fälle statt Formulare", "Archiv und Dossier für das Team"],
+    dossierEyebrow: "Für Nachfolge, Team & QM",
+    memoryEyebrow: "Für das ganze Team",
+    video: {
+      title: "Ein Anruf. 15 Minuten. Zwischen zwei Terminen.",
+      text: "Kein Workshop, keine Vorlage, die leer bleibt. Wir rufen den Mitarbeiter an, wann es passt, und fragen nach echten Fällen: Anlagen, Kunden, Lieferanten, wen man wann anruft.",
+      cardLabel: "Gespräch 3 von 10 · Anlagen und Störungen",
+    },
+    problem: {
+      title: "Das wichtigste Wissen geht mit dem Mitarbeiter.",
+      subtitle: "Pensionierung, Karenz, Kündigung: Der Termin ist bekannt, und trotzdem schreibt es niemand auf.",
+      points: [
+        {
+          stat: "Jede:r 10.",
+          text: "Beschäftigte in Österreich geht in den nächsten Jahren in Pension.",
+          source: "ORF",
+          sourceUrl: "https://orf.at/stories/3279789/",
+        },
+        {
+          stat: "89.000",
+          text: "Eltern sind in Österreich gleichzeitig in Karenz. Jedes Mal fehlt jemand, der etwas weiß.",
+          source: "Statistik Austria",
+          sourceUrl: "https://www.statistik.at/statistiken/bevoelkerung-und-soziales/sozialleistungen/familienleistungen",
+        },
+        {
+          stat: "fast 50 %",
+          text: "des Wissens in einem Unternehmen steht nirgends. Es sitzt in Köpfen.",
+          source: "Panopto Workplace Knowledge Report",
+          sourceUrl: "https://www.thisandthat.chat/blog/knowledge-management-statistics",
+        },
+      ],
+    },
+    steps: [
+      {
+        title: "Erstgespräch",
+        text: "20 Minuten am Telefon: Wir klären, welcher Mitarbeiter geht, bis wann, welches Wissen gesichert werden muss und wer es danach braucht.",
+      },
+      {
+        title: "Telefon-Interviews",
+        text: "8–15 Anrufe à 15 Minuten mit dem Mitarbeiter, der geht, wann es in den Dienst passt. Wir fragen nach echten Fällen, nicht nach Theorie. Was es schon schriftlich gibt, nehmen wir dazu.",
+      },
+      {
+        title: "Dossier & Archiv",
+        text: "Das Team bekommt ein Übergabe-Dossier und ein durchsuchbares Archiv. Die Nachfolge fragt das Archiv statt den Mitarbeiter, der nicht mehr da ist.",
+      },
+    ],
+    dossierPoints: [
+      "Kunden, Lieferanten und Absprachen, die nur dieser Mitarbeiter kennt",
+      "Anlagen, Abläufe und ihre Eigenheiten, mit Erfahrungswerten aus Jahren",
+      "Wer bei was anzurufen ist, intern und extern",
+      "Dazu vorhandene Unterlagen: Checklisten, Pläne, Verträge. Alles in einem Dossier",
+    ],
+    memoryPoints: [
+      "Durchsuchbar: „Warum steht Pumpe 4 im Winter auf Hand?“",
+      "Jede Antwort mit Quelle: aus welchem Gespräch sie stammt",
+      "Nachweis für ISO 9001: Wissen der Organisation, dokumentiert",
+    ],
+    cases: [
+      {
+        key: "retire",
+        eyebrow: "Pensionierung",
+        title: "Pensionierung mit Datum",
+        from: "Mitarbeiter",
+        to: "Nachfolge im Team",
+        text: "Dreißig Jahre Erfahrung gehen an einem bekannten Tag. Das Dossier bringt sie zur Nachfolge, bevor der Tag da ist.",
+        focus: ["Anlagen", "Routinen", "Ansprechpartner"],
+      },
+      {
+        key: "leave",
+        eyebrow: "Karenz",
+        title: "Karenz und Vertretung",
+        from: "Mitarbeiter",
+        to: "Vertretung",
+        text: "Die Vertretung startet nicht bei null. Sie fragt das Archiv, statt die Kollegin in der Karenz anzurufen.",
+        focus: ["Laufende Fälle", "Kunden", "Absprachen"],
+      },
+      {
+        key: "quit",
+        eyebrow: "Kündigung",
+        title: "Kündigung mit kurzer Frist",
+        from: "Mitarbeiter",
+        to: "Nachfolge in 4 Wochen",
+        text: "Vier Wochen reichen für zehn Gespräche. Das Wissen bleibt im Haus, auch wenn die Person schon weg ist.",
+        focus: ["Projekte", "Lieferanten", "Zugänge"],
+      },
+    ],
+    titles: {
+      steps: "In drei Schritten zum gesicherten Wissen",
+      result: "Zwei Dinge, die bleiben, wenn ein Mitarbeiter geht",
+      cases: "Für jeden Abschied mit Datum",
+    },
+    founding: {
+      title: "Sichern Sie das Wissen, bevor der Mitarbeiter geht",
+      subtitle: "Persönliche Begleitung vom Erstgespräch bis zum fertigen Dossier. Die Interviews starten innerhalb von 2 Wochen, auch bei kurzer Kündigungsfrist.",
+      priceUnit: "20 Minuten, kostenlos. Danach bekommen Sie ein Angebot für Ihren Fall.",
+    },
+    faq: [
+      whoInterviews,
+      {
+        q: "Wie viel Zeit kostet das den Mitarbeiter, der geht?",
+        a: "8–15 Gespräche à 15 Minuten, ein- bis zweimal pro Woche, verteilt über die letzten Wochen oder Monate. Der Mitarbeiter wählt die Zeiten oder ruft selbst an, wenn es gerade ruhig ist.",
+      },
+      {
+        q: "Was ist mit Betriebsrat und Datenschutz?",
+        a: "Der Mitarbeiter weiß, dass er mit einem KI-Interviewer spricht, und entscheidet, was er erzählt. Keine Bewertung, keine Emotionserkennung, Daten in der EU. Wir stellen eine Vorlage für die Betriebsvereinbarung bereit.",
+      },
+      {
+        q: "Ersetzt das die Einarbeitung?",
+        a: "Nein, es macht sie kürzer. Die Nachfolge hat vom ersten Tag an die Antworten, die sonst erst nach Monaten im Alltag auftauchen, und fragt das Archiv statt den Mitarbeiter, der nicht mehr da ist.",
+      },
+      {
+        q: "Brauchen wir eine Software dafür?",
+        a: "Nein. Wir rufen auf dem normalen Telefon an. Das Dossier kommt als PDF, das Archiv öffnet das Team im Browser.",
+      },
+      {
+        q: "Was kostet es?",
+        a: "Ein Preis pro Mitarbeiter, der geht, abhängig von der Zahl der Gespräche. Das besprechen wir im Erstgespräch, das selbst kostenlos ist.",
+      },
+    ],
+    closingTitle: "Das Wissen geht nicht in Pension.",
+    chat: {
+      business: "Instandhaltung Werk 2",
+      topics: "48 Themen · 9 Gespräche",
+      q1: "Warum steht Pumpe 4 im Winter auf Handbetrieb?",
+      a1: "Weil der Frostwächter seit dem Umbau 2019 zu früh auslöst. Im Winter auf Hand, und beim Hersteller den Meier anrufen, nicht die Hotline.",
+      source1: "Instandhalter · Gespräch 5 · 8. Februar",
+      q2: "Welche Lieferanten liefern bei Störungen am Wochenende?",
+    },
+  },
 };
 
 export const navLinks = [
@@ -353,7 +547,7 @@ export const navLinks = [
   { label: "FAQ", href: "#faq" },
 ];
 
-export const steps = [
+export const steps: Step[] = [
   {
     title: "Erstgespräch",
     text: "20 Minuten am Telefon: Wir klären, welches Wissen gesichert werden muss, bis wann, und wer es später braucht.",
@@ -369,9 +563,9 @@ export const steps = [
 ];
 
 // One offer, one price (see founding). These cards only show the three ways a hand-over happens.
-export const handoverCases = [
+export const handoverCases: HandoverCase[] = [
   {
-    key: "sale" as const,
+    key: "sale",
     eyebrow: "Verkauf",
     title: "Verkauf an Dritte",
     to: "Käufer & Bank",
@@ -379,7 +573,7 @@ export const handoverCases = [
     focus: ["Kunden", "Lieferanten", "Kalkulation"],
   },
   {
-    key: "family" as const,
+    key: "family",
     eyebrow: "Familie",
     title: "Übergabe in der Familie",
     to: "Tochter oder Sohn",
@@ -387,7 +581,7 @@ export const handoverCases = [
     focus: ["Absprachen", "Eigenheiten", "Ansprechpartner"],
   },
   {
-    key: "team" as const,
+    key: "team",
     eyebrow: "Team",
     title: "Übergabe im Team",
     to: "Meister oder Büroleitung",
@@ -422,10 +616,6 @@ export const foundingIncludes = [
   "Firmengedächtnis für Ihre Nachfolge",
 ];
 
-const whoInterviews = {
-  q: "Wer führt die Interviews?",
-  a: "Wissbert, unser KI-Interviewer. Er ruft Sie an, stellt die Fragen und hört zu, wie ein Kollege aus dem Fach, geduldig und ohne zu bewerten. Unser Team bereitet jedes Gespräch auf Ihren Betrieb vor, liest jede Antwort gegen und baut daraus Dossier und Firmengedächtnis.",
-};
 
 export const content: LandingContent = {
   title: "Tacita – Betrieb übergeben, Wissen behalten",

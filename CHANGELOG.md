@@ -6,6 +6,14 @@ Overview of user-facing changes.
 
 ## 2026-11-04
 
+### Neue Seite /7: Wenn ein Mitarbeiter geht
+- Variante für Teams und HR: Pensionierung, Karenz, Kündigung. Eigene Headline, eigene Zahlen (Pensionswelle, Karenz, Wissen in Köpfen), drei Fälle statt Übergabe-Arten, FAQ zu Betriebsrat und Einarbeitung
+- Gleicher Ablauf wie die Übergabe-Seiten: Telefon-Interviews, Dossier, Archiv, kostenloses Erstgespräch
+- Eigenes Video im Band (Mitarbeiterin am Telefon im Büro, iStock), Credit im Impressum
+
+### Logo bleibt auf der Seite
+- Ein Klick auf das Tacita-Logo führt auf den Anfang der aktuellen Seite, nicht mehr auf die Startseite
+
 ### Feedback aus dem Team eingebaut
 - Dossier-Karte auf allen Seiten: vierter Punkt „Dazu Ihre Unterlagen: Verträge, Preislisten, Kundendatei“, damit klar ist, dass das Telefon-Interview nur eine Quelle ist
 - Schritt „Telefon-Interviews“: „Was es schon schriftlich gibt, schicken Sie uns einfach mit.“
