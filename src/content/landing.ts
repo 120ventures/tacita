@@ -6,6 +6,8 @@ interface Stat {
   stat: string;
   text: string;
   source: string;
+  /** Link to the study or factsheet, shown as the source line. */
+  sourceUrl?: string;
 }
 
 // What the phone mockup in the results section shows: one question to the company memory and the answer
@@ -119,6 +121,7 @@ export const branchen: Record<string, BranchePreset> = {
       "Stammkunden und Flottenkunden, und was jeder von ihnen erwartet",
       "Teilelieferanten, Konditionen und wer bei Engpässen schnell liefert",
       "Pickerl, Prüfstelle, Behörden: Fristen und Ansprechpartner",
+      "Dazu Ihre Unterlagen: Verträge, Preislisten, Kundendatei. Alles in einem Dossier",
     ],
     memoryPoints: [
       "Durchsuchbar: „Welches Öl nimmt der Huber-Transporter?“",
@@ -159,6 +162,7 @@ export const branchen: Record<string, BranchePreset> = {
       "Wartungskunden und Hausverwaltungen, und wer wie betreut wird",
       "Anlagen im Bestand mit ihren Eigenheiten und Ersatzteilen",
       "Großhändler, Konditionen und Notfall-Lieferanten",
+      "Dazu Ihre Unterlagen: Verträge, Preislisten, Kundendatei. Alles in einem Dossier",
     ],
     memoryPoints: [
       "Durchsuchbar: „Was ist mit der Therme in der Hauptstraße 12?“",
@@ -199,6 +203,7 @@ export const branchen: Record<string, BranchePreset> = {
       "Kalkulation: wie Sie Aufträge bepreisen und wo die Fallen liegen",
       "Lieferanten für Platten, Furnier und Beschläge, mit Konditionen",
       "Architekten, Planer und Stammkunden, und was jeder erwartet",
+      "Dazu Ihre Unterlagen: Verträge, Preislisten, Kundendatei. Alles in einem Dossier",
     ],
     memoryPoints: [
       "Durchsuchbar: „Welche Kante nehmen wir beim Mayer?“",
@@ -239,6 +244,7 @@ export const branchen: Record<string, BranchePreset> = {
       "Lieferanten für Fleisch, Gemüse, Wein und Getränke, mit Konditionen",
       "Stammgäste, Stammtische und Feste, und wer was erwartet",
       "Saisonplanung, Personal, Behörden und Brauereivertrag",
+      "Dazu Ihre Unterlagen: Verträge, Preislisten, Kundendatei. Alles in einem Dossier",
     ],
     memoryPoints: [
       "Durchsuchbar: „Wer liefert den Fisch am Freitag?“",
@@ -279,6 +285,7 @@ export const branchen: Record<string, BranchePreset> = {
       "Stammkund:innen und was jede und jeder von ihnen erwartet",
       "Farbrezepturen, Lieferanten und Konditionen",
       "Preise, Terminrhythmus, Team und Saison",
+      "Dazu Ihre Unterlagen: Verträge, Preislisten, Kundendatei. Alles in einem Dossier",
     ],
     memoryPoints: [
       "Durchsuchbar: „Welche Farbe bekommt die Frau Berger?“",
@@ -319,6 +326,7 @@ export const branchen: Record<string, BranchePreset> = {
       "Lieferanten, Konditionen und mündliche Absprachen, die nirgends stehen",
       "Sortiment: was läuft, was nicht, und warum",
       "Schlüsselkunden, Saison und Aktionen, die den Umsatz tragen",
+      "Dazu Ihre Unterlagen: Verträge, Preislisten, Kundendatei. Alles in einem Dossier",
     ],
     memoryPoints: [
       "Durchsuchbar: „Welchen Rabatt haben wir beim Hauptlieferanten?“",
@@ -352,7 +360,7 @@ export const steps = [
   },
   {
     title: "Telefon-Interviews",
-    text: "8–15 Anrufe à 15 Minuten, wann es Ihnen passt, auch im Auto. Wir fragen nach echten Fällen, nicht nach Theorie.",
+    text: "8–15 Anrufe à 15 Minuten, wann es Ihnen passt, auch im Auto. Wir fragen nach echten Fällen, nicht nach Theorie. Was es schon schriftlich gibt, schicken Sie uns einfach mit.",
   },
   {
     title: "Dossier & Archiv",
@@ -449,13 +457,24 @@ export const content: LandingContent = {
     title: "Das wichtigste Wissen Ihres Betriebs steht nirgends.",
     subtitle: "Es steckt in Ihrem Kopf. Und genau das drückt den Preis, wenn Sie übergeben.",
     points: [
-      { stat: "52.500", text: "österreichische Betriebe stehen bis 2034 vor der Übergabe.", source: "WKO" },
+      {
+        stat: "52.500",
+        text: "österreichische Betriebe stehen bis 2034 vor der Übergabe.",
+        source: "WKÖ Factsheet Nachfolge 2026",
+        sourceUrl: "https://www.wko.at/oe/gruendung/factsheet-nachfolge.pdf",
+      },
       {
         stat: "20–40 %",
-        text: "Abschlag beim Verkaufspreis, wenn der Betrieb am Wissen der Inhaber:innen hängt.",
-        source: "IHK-Studie 2025",
+        text: "weniger Verkaufspreis, wenn der Betrieb am Wissen der Inhaber:innen hängt. Käufer zahlen nur für das, was übertragbar ist.",
+        source: "IHK-Studie Unternehmensnachfolge 2025",
+        sourceUrl: "https://www.ihk-rlp.de/servicemarken/presse/aktuelle-pressemitteilungen/studie-unternehmensnachfolge-in-rheinland-pfalz-2025-6547274",
       },
-      { stat: "2 von 3", text: "Inhaber:innen sagen: Eine Nachfolge zu finden ist schwierig.", source: "IHK-Studie 2025" },
+      {
+        stat: "2 von 3",
+        text: "Inhaber:innen sagen: Eine Nachfolge zu finden ist schwierig.",
+        source: "IHK-Studie Unternehmensnachfolge 2025",
+        sourceUrl: "https://www.ihk-rlp.de/servicemarken/presse/aktuelle-pressemitteilungen/studie-unternehmensnachfolge-in-rheinland-pfalz-2025-6547274",
+      },
     ],
   },
   video: {
@@ -472,6 +491,7 @@ export const content: LandingContent = {
       "Kunden, Lieferanten und Absprachen, die nirgends stehen",
       "Abläufe, Preise und Eigenheiten des Betriebs",
       "Zeigt: Das Wissen ist übertragbar, nicht an Sie gebunden",
+      "Dazu Ihre Unterlagen: Verträge, Preislisten, Kundendatei. Alles in einem Dossier",
     ],
   },
   memory: {

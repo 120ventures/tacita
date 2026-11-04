@@ -725,7 +725,16 @@ const Landing = () => {
                   {p.stat}
                 </p>
                 <p className="pt-1.5 text-[15px] leading-[1.45] text-body sm:pt-3.5 sm:text-[17px] sm:leading-[1.5]">{p.text}</p>
-                <p className="pt-2.5 text-[11px] text-subtle sm:pt-[18px] sm:text-xs">Quelle: {p.source}</p>
+                <p className="pt-2.5 text-[11px] text-subtle sm:pt-[18px] sm:text-xs">
+                  Quelle:{" "}
+                  {p.sourceUrl ? (
+                    <a href={p.sourceUrl} target="_blank" rel="noreferrer" className="underline hover:text-foreground">
+                      {p.source}
+                    </a>
+                  ) : (
+                    p.source
+                  )}
+                </p>
               </Card>
             ))}
           </div>

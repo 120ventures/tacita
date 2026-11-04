@@ -6,6 +6,11 @@ Overview of user-facing changes.
 
 ## 2026-11-04
 
+### Feedback aus dem Team eingebaut
+- Dossier-Karte auf allen Seiten: vierter Punkt „Dazu Ihre Unterlagen: Verträge, Preislisten, Kundendatei“, damit klar ist, dass das Telefon-Interview nur eine Quelle ist
+- Schritt „Telefon-Interviews“: „Was es schon schriftlich gibt, schicken Sie uns einfach mit.“
+- Problem-Kacheln: Quellen sind jetzt Links (WKÖ Factsheet, IHK-Studie 2025), der Preisabschlag ist deutlicher formuliert
+
 ### Datenschutzerklärung
 - Neue Seite /datenschutz, der Footer-Link „Datenschutz“ führt jetzt dorthin (vorher ins Leere)
 
