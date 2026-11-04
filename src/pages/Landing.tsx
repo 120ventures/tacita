@@ -925,7 +925,7 @@ const Landing = () => {
           <p>Ein Projekt von 120 Ventures · Wien</p>
           <div className="flex flex-wrap justify-center gap-7">
             <Link to="/impressum" className="hover:text-foreground">Impressum</Link>
-            <a href="#" className="hover:text-foreground">Datenschutz</a>
+            <Link to="/datenschutz" className="hover:text-foreground">Datenschutz</Link>
             <a href="#erstgespraech" className="hover:text-foreground">Kontakt</a>
           </div>
         </div>

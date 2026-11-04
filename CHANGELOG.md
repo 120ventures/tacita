@@ -6,6 +6,9 @@ Overview of user-facing changes.
 
 ## 2026-11-04
 
+### Datenschutzerklärung
+- Neue Seite /datenschutz, der Footer-Link „Datenschutz“ führt jetzt dorthin (vorher ins Leere)
+
 ### Branchenseiten als Nummern
 - Die Branchenseiten sind jetzt unter /1 (Gastronomie), /2 (Kfz), /3 (Installateur), /4 (Tischlerei), /5 (Fachhandel) und /6 (Friseur) erreichbar, damit der Link im Outreach keine Branche verrät
 - Die alten Adressen /gastro, /kfz usw. funktionieren weiter
